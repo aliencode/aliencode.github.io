@@ -1,0 +1,30 @@
+Aliencode <https://github.com/aliencode[@aliencode]>
+:description: aliencode.me
+:keywords: aliencode.me
+:doctype: book
+:compat-mode:
+:page-layout!:
+:toc:
+:toc-placement: right
+:toclevels: 4
+:sectanchors:
+:sectlinks:
+:sectnums:
+:linkattrs:
+:icons: font
+:source-highlighter: highlight.js
+:experimental:
+:stem:
+:idprefix:
+:idseparator: -
+:ast: &ast;
+:dagger: pass:normal[^&dagger;^]
+:y: icon:check[role="green"]
+:n: icon:times[role="red"]
+:c: icon:file-text-o[role="blue"]
+:table-caption!:
+:example-caption!:
+:figure-caption!:
+:underscore: _
+
+include::sidebar.adoc[]
