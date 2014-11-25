@@ -1,67 +1,147 @@
-# aliencode.me
+# GO语言简单的体验笔记
 include::../layout/header.adoc[]
 
-## hello
+## 安装
 
-You're live! Nice. We've put together a little post to introduce you to the Ghost editor and get you started. You can manage your content by signing in to the admin area at `<your blog URL>/ghost/`. When you arrive, you can select this post from a list on the left and see a preview of it on the right. Click the little pencil icon at the top of the preview to edit this post and read the next section!
+### 下载GO
+google开发一门比较新的语言，官方下载主页： https://golang.org/dl/ ，包括所有版本的下载链接，我们通常会选择windows版本的下载。 +
+关于windows版本的GO提供了安装包和zip两种方式。比较喜欢zip的方式，绿色环保， +
+比如： `go1.3.3.windows-amd64.zip`  +
+然后就是下载解压到指定目录，下载过程可能会很漫长或者根本打不开，至于原因嘛，您懂得 :sweat_smile: ，就请到  http://golangtc.com/download  这个网站下载，是国内一个相当于代理吧。
 
-## Getting Started
+### 配置环境变量
+. 环境变量的配置跟JAVA类似，`GOROOT`  对应JAVA的就是 `JAVA_HOME`。 所以添加环境变量 `GOROOT`  值为你解压后的 GO 的根目录，注意不是bin目录。
+. 设置PATH环境变量，让终端或CMD窗口可识别GO命令，把GO解压后的bin路径添加到path环境变量。
+. `GOPATH` 这个环境变量可能理解为GO的工作空间，用来存放项目源文件，第三方依赖和编译后的 `.a`  文件。简单的说就是你以后开发项目存放的根目录，后面还会说明一下 `GOPATH`  这个东西怎么用比较好。目前就随便指定一个目录给 `GOPATH`  环境变量，或者不指定也可以，就直接跟随每个项目走，放在项目的目录里。
 
-Ghost uses something called Markdown for writing. Essentially, it's a shorthand way to manage your post formatting as you write!
+## 建项目
+需要一个特定的编辑器liteide，经过实践也最好用这个编辑器，支持中文，虽然还不好用但已经没有更好的了，不知道IDEA什么时候会支持GO，只有等等看了。 +
+下载liteide， http://sourceforge.net/projects/liteide/files/ ，github地址： https://github.com/visualfc/liteide ，下载就一个zip包，解压后运行那个exe就启动了liteide编辑器，真心喜欢这种zip的提供方式啊 :smile: ！
 
-Writing in Markdown is really easy. In the left hand panel of Ghost, you simply write as you normally would. Where appropriate, you can use *shortcuts* to **style** your content. For example, a list:
+新建一个项目的根目录，如： `D:\DEV\test\gotest\` ，gotest就是项目的根目录，用liteide打开这个目录，然后按下面步骤进行：
 
-* Item number one
-* Item number two
-    * A nested item
-* A final item
+### 第一步，设置项目环境变量
+为了不把所有的项目放在一起，所以为每个项目设定一下环境变量，主要是 `GOPATH`.。 +
+kbd:[查看] -> kbd:[编辑环境变量] ，打开一个窗口，在这里可以设置一下你项目的环境变量，大致内容如下：
 
-or with numbers!
+    # native compiler windows amd64
+    GOROOT=D:\SOFT\go1.3.windows-amd64\go #<1>
+    GOPATH=D:\DEV\test\gotest\ #<2>
+    #GOBIN=
+    GOARCH=amd64
+    GOOS=windows
+    CGO_ENABLED=1
+    #
+    PATH=c:\mingw64\bin;%GOROOT%\bin;%PATH%
+    #
+    LITEIDE_GDB=gdb64
+    LITEIDE_MAKE=mingw32-make
+    LITEIDE_TERM=%COMSPEC%
+    LITEIDE_TERMARGS=
+    LITEIDE_EXEC=%COMSPEC%
+    LITEIDE_EXECOPT=/C
 
-1. Remember to buy some milk
-2. Drink the milk
-3. Tweet that I remembered to buy the milk, and drank it
+<1> GOROOT指定到你GO安装目录
+<2> GOPATH指定到你项目的根目录，本例是 `D:\DEV\test\gotest\` ，在这里指定是为了把项目所有依赖的第三方包让go放在我们的项目目录里。GOPATH 可以简单的理解为项目的根目录，下面有  `src`  、 `pkg` 、 `bin`  三个目录，src需要自己创建，pkg和bin会在编译时创建，pkg存放编译后的文件，bin存放可执行文件。这个GOPATH感觉设计的很傻很多余，其实GO可以参考NODE的NPM实现方式，只是取消那个配置文件，固定目录结构就是最好的方式。
 
-### Links
+### 第二步，项目目录构建
+创建项目源码结构，思路跟java差不多，你在项目根目录也就是gotest目录下建一个 `src`  名字的目录，这是固定的名字，go认为这里你代码的根目录，src下面就是你的go源码和第三方类库的源码，go的类库通常以源码的方式提供，再也不用找不到源码而去反编译class文件了 :):，在项目编译运行时统一编译到pkg下。src目录下可以是包或者直接就是go文件，如 `src/config/config.go`  或者 `src/gotest/main.go` ， config 和 gotest 在这里就是你的包名。
 
-Want to link to a source? No problem. If you paste in a URL, like http://ghost.org - it'll automatically be linked up. But if you want to customise your anchor text, you can do that too! Here's a link to [the Ghost website](http://ghost.org). Neat.
+最终目录如图：
 
-### What about Images?
+image::assets/imgs/go.png[]
 
-Images work too! Already know the URL of the image you want to include in your article? Simply paste it in like this to make it show up:
+其中 `src/gotest/public`  相当是 java里的webapp目录，存放静态文件根目录。通过 `m.Use(martini.Static("assets")) ` 添加其它静态目录。
 
-{<1>}![The Ghost Logo](https://ghost.org/images/ghost.png)
+### 第二步，示例代码
 
-Not sure which image you want to use yet? That's ok too. Leave yourself a descriptive placeholder and keep writing. Come back later and drag and drop the image in to upload:
+.config.go
+====
+```go
+package config #<1>
 
-{<2>}![A bowl of bananas]
+func LoadConfig() { #<2>
+
+}
+```
+<1> 包路径，跟java类似，只是它用 `/` 代替 `.` ，在java里的包路径  `com.xxx.config`，go是 `com/xxx/config`
+<2> 一个函数，很简单
+====
 
 
-### Quoting
+.main.go
+====
+```go
+package main #<1>
 
-Sometimes a link isn't enough, you want to quote someone on what they've said. It was probably very wisdomous. Is wisdomous a word? Find out in a future release when we introduce spellcheck! For now - it's definitely a word.
+import (  #<2>
+	"config"
+	"github.com/go-martini/martini"
+	"github.com/martini-contrib/render"
+)
 
-> Wisdomous - it's definitely a word.
+func main() {  #<3>
 
-### Working with Code
+	config.LoadConfig()  #<4>
 
-Got a streak of geek? We've got you covered there, too. You can write inline `<code>` blocks really easily with back ticks. Want to show off something more comprehensive? 4 spaces of indentation gets you there.
+	m := martini.Classic()  #<5>
+	m.Use(render.Renderer())  #<6>
 
-    .awesome-thing {
-        display: block;
-        width: 100%;
-    }
+	m.Get("/", func() string {  #<7>
+		return "Hello world!"
+	})
 
-### Ready for a Break? 
+	data := [...]string{"aa", "bbb"}  #<8>
 
-Throw 3 or more dashes down on any new line and you've got yourself a fancy new divider. Aw yeah.
+	m.Get("/json", func(r render.Render) {  #<9>
+		r.JSON(200, data)
+	})
 
----
+	m.Run()  #<10>
 
-### Advanced Usage
+}
+```
 
-There's one fantastic secret about Markdown. If you want, you can write plain old HTML and it'll still work! Very flexible.
+<1> `package main`  go语言的入口包名，固定的，就是说你的项目必须有一个main包
+<2> 引入其它包
+<3> main函数，跟java类似，必须的
+<4> 其它函数的调用方法
+<5> 初始化martini框架，注意它变量的赋值方式， `:=`
+<6> martini框架插件启用方式
+<7> martini框架绑定请求的方式
+<8> go数组赋值方式，`[...]` 表示不定长度，`string` 表示数据类型，貌似没办法存储多种类型的数据，`{"aa", "bbb"}`  数组值。
+<9> 使用插件 `martini-contrib/render` 输出json数据，更多用法： https://github.com/martini-contrib/render
+<10> 启动martini框架
+====
 
-<input type="text" placeholder="I'm an input field!" />
 
-That should be enough to get you started. Have fun - and let us know what you think :)
+### 编译运行项目
+
+首先要把第三方依赖给下载回来，这点GO做的非常好，它是通过分析你源码来得到你要用到哪些依赖库，它会从github等开源网站上下载。不需要像NPM或者MAVEN一样需要一个配置文件来指定依赖，不过问题来了，如何指定不同版本的引用呢？全是最新？ +
+
+**下载依赖** ，打开一个GO文件，如 `main.go` ，在工具栏会出行一行命令按钮，常用之一就是 `go get` 命令，对应的工具栏按钮就是 kbd:[GET] 图标，点击一直就会通过 `go get` 命令下载你当前文件所依赖的第三方类库，呵呵 ，是不是比java方便啊！
+
+**运行项目** ， 下载完依赖就可以运行项目了，呵呵，就等这一刻。打开main.go，点击最常用的图标 kbd:[BR] 如同 `go run` 命令，然后不出意外的话就启动运行了。说真的启动一个web应用这速度是非常之快呀，比起tomcat等这个简直就是秒启，真正节约了我们开发时间 :+1:
+
+## GO不一样的地方
+与java相比的几个最明显的不同之处：
+
+. 不能有多余的变量，如果申明的变量没有被使用直接异常
+. 不能有多余的引用，引入了没有乃至的类库也会异常
+. 变量的申明是，名字在前，类型在后，如： var str string，当然可以简单写成 str := "a"，但有些时候是无法避免的如： `json := [...]string{"aa", "bbb"} `
+. 结尾没有分号， `;`
+. 多个变量一起申明： `a,b := 100,101`
+
+其它的就暂时没有深入研究了。
+
+## 总结
+最近接触了docker后，发现很多周边项目都是用go来编写的，就找时间体验了一下，由于没有深入学习，还没有太多体会。 +
+文本简单的使用go语言的web框架martini体验了一把用go开发web应用的方法，martini框架可以非常方便的实现目前比较流行了RESTFul协议的web服务，通过上面几行代码就可以实现一个web应用，然后有一个json接口输出json数据，当然输出xml也非常简单，如 `r.XML(200, data)` ，又或者渲染一个HTML模板 `r.HTML(200, "mytemplate", data)` 。真的是非常方便简单，给你的感觉就是这东西天生就是为web开发而生，一切都是那么的自然和美妙！ +
+当然这只是简单的使用，不知道业务变是非常复杂以后go还能不能如此简单的应对呢，期待大家的共同检验也期待go语言尽快成熟和热闹起来！
+
+## 参考
+. GO语言入门： https://github.com/astaxie/build-web-application-with-golang/blob/master/ebook/preface.md
+. GO WEB开发框架martini的中文入门： https://github.com/go-martini/martini/blob/master/translations/README_zh_cn.md
+. 在线体验： http://tour.golangtc.com/welcome/1
+
+

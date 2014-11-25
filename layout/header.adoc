@@ -12,7 +12,7 @@ Aliencode <https://github.com/aliencode[@aliencode]>
 :sectnums:
 :linkattrs:
 :icons: font
-:source-highlighter: highlight.js
+:source-highlighter: prettify
 :experimental:
 :stem:
 :idprefix:
@@ -26,5 +26,6 @@ Aliencode <https://github.com/aliencode[@aliencode]>
 :example-caption!:
 :figure-caption!:
 :underscore: _
+:btitle: 小郭的博客aliencode
 
 include::sidebar.adoc[]

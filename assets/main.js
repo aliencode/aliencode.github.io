@@ -76,9 +76,9 @@ $(function() {
 	  }
 	});
 	
-	$('pre.highlight code').each(function(i, block) {
+	/*$('pre.highlight code').each(function(i, block) {
 		hljs.highlightBlock(block);
-	});
+	});*/
 
     $('[class^="date:"]').each(function(i,e){
         $(this).html( $(this).text()+'<i>@ ' + $('[class^="date:"]').attr('class').split(':')[1] + '</i>' )

@@ -1,1 +1,349 @@
-Come soon!
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="aliencode.me">
+<meta name="keywords" content="aliencode.me">
+<meta name="author" content="Aliencode">
+<title>GO语言简单的体验笔记 - 小郭的博客aliencode</title>
+<link rel="stylesheet" href="assets/main.css">
+<link rel="stylesheet" href="share/font-awesome-4.2.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="share/prettify.min.css">
+<script src="share/prettify.min.js"></script>
+<script>document.addEventListener('DOMContentLoaded', prettyPrint)</script>
+<link rel="stylesheet" href="share/highlight-github.css">
+</head>
+<body class="book toc2 toc-right">
+<div id="header">
+<h1><i>小郭的博客aliencode</i> GO语言简单的体验笔记</h1>
+</div>
+<div id="content">
+    
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#安装">1. 安装</a>
+<ul class="sectlevel2">
+<li><a href="#下载go">1.1. 下载GO</a></li>
+<li><a href="#配置环境变量">1.2. 配置环境变量</a></li>
+</ul>
+</li>
+<li><a href="#建项目">2. 建项目</a>
+<ul class="sectlevel2">
+<li><a href="#第一步-设置项目环境变量">2.1. 第一步，设置项目环境变量</a></li>
+<li><a href="#第二步-项目目录构建">2.2. 第二步，项目目录构建</a></li>
+<li><a href="#第二步-示例代码">2.3. 第二步，示例代码</a></li>
+<li><a href="#编译运行项目">2.4. 编译运行项目</a></li>
+</ul>
+</li>
+<li><a href="#go不一样的地方">3. GO不一样的地方</a></li>
+<li><a href="#总结">4. 总结</a></li>
+<li><a href="#参考">5. 参考</a></li>
+</ul>
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><a href="index.html" class="date:2014-11-13">GO语言简单的体验笔记</a></p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="安装"><a class="anchor" href="#安装"></a>1. 安装</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="下载go"><a class="anchor" href="#下载go"></a>1.1. 下载GO</h3>
+<div class="paragraph">
+<p>google开发一门比较新的语言，官方下载主页： <a href="https://golang.org/dl/" class="bare">https://golang.org/dl/</a> ，包括所有版本的下载链接，我们通常会选择windows版本的下载。<br>
+关于windows版本的GO提供了安装包和zip两种方式。比较喜欢zip的方式，绿色环保，<br>
+比如： <code>go1.3.3.windows-amd64.zip</code> <br>
+然后就是下载解压到指定目录，下载过程可能会很漫长或者根本打不开，至于原因嘛，您懂得 :sweat_smile: ，就请到  <a href="http://golangtc.com/download" class="bare">http://golangtc.com/download</a>  这个网站下载，是国内一个相当于代理吧。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="配置环境变量"><a class="anchor" href="#配置环境变量"></a>1.2. 配置环境变量</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>环境变量的配置跟JAVA类似，<code>GOROOT</code>  对应JAVA的就是 <code>JAVA_HOME</code>。 所以添加环境变量 <code>GOROOT</code>  值为你解压后的 GO 的根目录，注意不是bin目录。</p>
+</li>
+<li>
+<p>设置PATH环境变量，让终端或CMD窗口可识别GO命令，把GO解压后的bin路径添加到path环境变量。</p>
+</li>
+<li>
+<p><code>GOPATH</code> 这个环境变量可能理解为GO的工作空间，用来存放项目源文件，第三方依赖和编译后的 <code>.a</code>  文件。简单的说就是你以后开发项目存放的根目录，后面还会说明一下 <code>GOPATH</code>  这个东西怎么用比较好。目前就随便指定一个目录给 <code>GOPATH</code>  环境变量，或者不指定也可以，就直接跟随每个项目走，放在项目的目录里。</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="建项目"><a class="anchor" href="#建项目"></a>2. 建项目</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>需要一个特定的编辑器liteide，经过实践也最好用这个编辑器，支持中文，虽然还不好用但已经没有更好的了，不知道IDEA什么时候会支持GO，只有等等看了。<br>
+下载liteide， <a href="http://sourceforge.net/projects/liteide/files/" class="bare">http://sourceforge.net/projects/liteide/files/</a> ，github地址： <a href="https://github.com/visualfc/liteide" class="bare">https://github.com/visualfc/liteide</a> ，下载就一个zip包，解压后运行那个exe就启动了liteide编辑器，真心喜欢这种zip的提供方式啊 :smile: ！</p>
+</div>
+<div class="paragraph">
+<p>新建一个项目的根目录，如： <code>D:\DEV\test\gotest\</code> ，gotest就是项目的根目录，用liteide打开这个目录，然后按下面步骤进行：</p>
+</div>
+<div class="sect2">
+<h3 id="第一步-设置项目环境变量"><a class="anchor" href="#第一步-设置项目环境变量"></a>2.1. 第一步，设置项目环境变量</h3>
+<div class="paragraph">
+<p>为了不把所有的项目放在一起，所以为每个项目设定一下环境变量，主要是 <code>GOPATH</code>.。<br>
+<kbd>查看</kbd> &#8594; <kbd>编辑环境变量</kbd> ，打开一个窗口，在这里可以设置一下你项目的环境变量，大致内容如下：</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre># native compiler windows amd64
+GOROOT=D:\SOFT\go1.3.windows-amd64\go <i class="conum" data-value="1"></i><b>(1)</b>
+GOPATH=D:\DEV\test\gotest\ <i class="conum" data-value="2"></i><b>(2)</b>
+#GOBIN=
+GOARCH=amd64
+GOOS=windows
+CGO_ENABLED=1
+#
+PATH=c:\mingw64\bin;%GOROOT%\bin;%PATH%
+#
+LITEIDE_GDB=gdb64
+LITEIDE_MAKE=mingw32-make
+LITEIDE_TERM=%COMSPEC%
+LITEIDE_TERMARGS=
+LITEIDE_EXEC=%COMSPEC%
+LITEIDE_EXECOPT=/C</pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>GOROOT指定到你GO安装目录</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>GOPATH指定到你项目的根目录，本例是 <code>D:\DEV\test\gotest\</code> ，在这里指定是为了把项目所有依赖的第三方包让go放在我们的项目目录里。GOPATH 可以简单的理解为项目的根目录，下面有  <code>src</code>  、 <code>pkg</code> 、 <code>bin</code>  三个目录，src需要自己创建，pkg和bin会在编译时创建，pkg存放编译后的文件，bin存放可执行文件。这个GOPATH感觉设计的很傻很多余，其实GO可以参考NODE的NPM实现方式，只是取消那个配置文件，固定目录结构就是最好的方式。</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="第二步-项目目录构建"><a class="anchor" href="#第二步-项目目录构建"></a>2.2. 第二步，项目目录构建</h3>
+<div class="paragraph">
+<p>创建项目源码结构，思路跟java差不多，你在项目根目录也就是gotest目录下建一个 <code>src</code>  名字的目录，这是固定的名字，go认为这里你代码的根目录，src下面就是你的go源码和第三方类库的源码，go的类库通常以源码的方式提供，再也不用找不到源码而去反编译class文件了 :):，在项目编译运行时统一编译到pkg下。src目录下可以是包或者直接就是go文件，如 <code>src/config/config.go</code>  或者 <code>src/gotest/main.go</code> ， config 和 gotest 在这里就是你的包名。</p>
+</div>
+<div class="paragraph">
+<p>最终目录如图：</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="assets/imgs/go.png" alt="go">
+</div>
+</div>
+<div class="paragraph">
+<p>其中 <code>src/gotest/public</code>  相当是 java里的webapp目录，存放静态文件根目录。通过 `m.Use(martini.Static("assets")) ` 添加其它静态目录。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="第二步-示例代码"><a class="anchor" href="#第二步-示例代码"></a>2.3. 第二步，示例代码</h3>
+<div class="exampleblock">
+<div class="title">config.go</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-go" data-lang="go">package config <i class="conum" data-value="1"></i><b>(1)</b>
+
+func LoadConfig() { <i class="conum" data-value="2"></i><b>(2)</b>
+
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>包路径，跟java类似，只是它用 <code>/</code> 代替 <code>.</code> ，在java里的包路径  <code>com.xxx.config</code>，go是 <code>com/xxx/config</code></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>一个函数，很简单</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="exampleblock">
+<div class="title">main.go</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-go" data-lang="go">package main <i class="conum" data-value="1"></i><b>(1)</b>
+
+import (  <i class="conum" data-value="2"></i><b>(2)</b>
+	"config"
+	"github.com/go-martini/martini"
+	"github.com/martini-contrib/render"
+)
+
+func main() {  <i class="conum" data-value="3"></i><b>(3)</b>
+
+	config.LoadConfig()  <i class="conum" data-value="4"></i><b>(4)</b>
+
+	m := martini.Classic()  <i class="conum" data-value="5"></i><b>(5)</b>
+	m.Use(render.Renderer())  <i class="conum" data-value="6"></i><b>(6)</b>
+
+	m.Get("/", func() string {  <i class="conum" data-value="7"></i><b>(7)</b>
+		return "Hello world!"
+	})
+
+	data := [...]string{"aa", "bbb"}  <i class="conum" data-value="8"></i><b>(8)</b>
+
+	m.Get("/json", func(r render.Render) {  <i class="conum" data-value="9"></i><b>(9)</b>
+		r.JSON(200, data)
+	})
+
+	m.Run()  <i class="conum" data-value="10"></i><b>(10)</b>
+
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><code>package main</code>  go语言的入口包名，固定的，就是说你的项目必须有一个main包</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>引入其它包</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>main函数，跟java类似，必须的</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>其它函数的调用方法</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>初始化martini框架，注意它变量的赋值方式， <code>:=</code></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>martini框架插件启用方式</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>martini框架绑定请求的方式</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="8"></i><b>8</b></td>
+<td>go数组赋值方式，<code>[...]</code> 表示不定长度，<code>string</code> 表示数据类型，貌似没办法存储多种类型的数据，<code>{"aa", "bbb"}</code>  数组值。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="9"></i><b>9</b></td>
+<td>使用插件 <code>martini-contrib/render</code> 输出json数据，更多用法： <a href="https://github.com/martini-contrib/render" class="bare">https://github.com/martini-contrib/render</a></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="10"></i><b>10</b></td>
+<td>启动martini框架</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="编译运行项目"><a class="anchor" href="#编译运行项目"></a>2.4. 编译运行项目</h3>
+<div class="paragraph">
+<p>首先要把第三方依赖给下载回来，这点GO做的非常好，它是通过分析你源码来得到你要用到哪些依赖库，它会从github等开源网站上下载。不需要像NPM或者MAVEN一样需要一个配置文件来指定依赖，不过问题来了，如何指定不同版本的引用呢？全是最新？<br></p>
+</div>
+<div class="paragraph">
+<p><strong>下载依赖</strong> ，打开一个GO文件，如 <code>main.go</code> ，在工具栏会出行一行命令按钮，常用之一就是 <code>go get</code> 命令，对应的工具栏按钮就是 <kbd>GET</kbd> 图标，点击一直就会通过 <code>go get</code> 命令下载你当前文件所依赖的第三方类库，呵呵 ，是不是比java方便啊！</p>
+</div>
+<div class="paragraph">
+<p><strong>运行项目</strong> ， 下载完依赖就可以运行项目了，呵呵，就等这一刻。打开main.go，点击最常用的图标 <kbd>BR</kbd> 如同 <code>go run</code> 命令，然后不出意外的话就启动运行了。说真的启动一个web应用这速度是非常之快呀，比起tomcat等这个简直就是秒启，真正节约了我们开发时间 :+1:</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="go不一样的地方"><a class="anchor" href="#go不一样的地方"></a>3. GO不一样的地方</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>与java相比的几个最明显的不同之处：</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>不能有多余的变量，如果申明的变量没有被使用直接异常</p>
+</li>
+<li>
+<p>不能有多余的引用，引入了没有乃至的类库也会异常</p>
+</li>
+<li>
+<p>变量的申明是，名字在前，类型在后，如： var str string，当然可以简单写成 str := "a"，但有些时候是无法避免的如： `json := [&#8230;&#8203;]string{"aa", "bbb"} `</p>
+</li>
+<li>
+<p>结尾没有分号， <code>;</code></p>
+</li>
+<li>
+<p>多个变量一起申明： <code>a,b := 100,101</code></p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>其它的就暂时没有深入研究了。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="总结"><a class="anchor" href="#总结"></a>4. 总结</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>最近接触了docker后，发现很多周边项目都是用go来编写的，就找时间体验了一下，由于没有深入学习，还没有太多体会。<br>
+文本简单的使用go语言的web框架martini体验了一把用go开发web应用的方法，martini框架可以非常方便的实现目前比较流行了RESTFul协议的web服务，通过上面几行代码就可以实现一个web应用，然后有一个json接口输出json数据，当然输出xml也非常简单，如 <code>r.XML(200, data)</code> ，又或者渲染一个HTML模板 <code>r.HTML(200, "mytemplate", data)</code> 。真的是非常方便简单，给你的感觉就是这东西天生就是为web开发而生，一切都是那么的自然和美妙！<br>
+当然这只是简单的使用，不知道业务变是非常复杂以后go还能不能如此简单的应对呢，期待大家的共同检验也期待go语言尽快成熟和热闹起来！</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="参考"><a class="anchor" href="#参考"></a>5. 参考</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>GO语言入门： <a href="https://github.com/astaxie/build-web-application-with-golang/blob/master/ebook/preface.md" class="bare">https://github.com/astaxie/build-web-application-with-golang/blob/master/ebook/preface.md</a></p>
+</li>
+<li>
+<p>GO WEB开发框架martini的中文入门： <a href="https://github.com/go-martini/martini/blob/master/translations/README_zh_cn.md" class="bare">https://github.com/go-martini/martini/blob/master/translations/README_zh_cn.md</a></p>
+</li>
+<li>
+<p>在线体验： <a href="http://tour.golangtc.com/welcome/1" class="bare">http://tour.golangtc.com/welcome/1</a></p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2014-11-13 15:19:53 中国标准时间
+</div>
+</div>
+<script src="share/jquery.js"></script>
+<script src="share/underscore.js"></script>
+<script src="share/holder.js"></script>
+<script src="share/raphael-min.js"></script>
+<script src="share/flowchart.min.js"></script>
+<script src="share/sequence-diagram-min.js"></script>
+<script src="share/emojify.min.js"></script>
+<script src="assets/main.js"></script>
+</body>
+</html>
