@@ -2,7 +2,7 @@
 
 ## theme
 
-Aliencode Strip
+Jekyll-Strip
 
 ## emoji
 
@@ -27,11 +27,6 @@ def show
 end
 {% endhighlight %}
 
-或者
-
-~~~ruby
-......
-~~~
 
 ## 输出模板代码
 由于jekll会识别文章中 {% %} 这样的标记，所以用以下方法输出这样的原文
