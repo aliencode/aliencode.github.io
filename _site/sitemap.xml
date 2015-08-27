@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>http://aliencode.me/github-pages-blog/</loc>
+    <lastmod>2015-08-21T00:00:00+08:00</lastmod>
+  </url>
+  <url>
+    <loc>http://aliencode.me/go-lang-install/</loc>
+    <lastmod>2014-05-03T00:00:00+08:00</lastmod>
+  </url>
+  <url>
+    <loc>http://aliencode.me/sublimetext/</loc>
+    <lastmod>2013-10-29T00:00:00+08:00</lastmod>
+  </url>
+  <url>
+    <loc>http://aliencode.me/maven-install-jar-local/</loc>
+    <lastmod>2013-06-10T00:00:00+08:00</lastmod>
+  </url>
+  <url>
+    <loc>http://aliencode.me/maven/</loc>
+    <lastmod>2013-05-01T00:00:00+08:00</lastmod>
+  </url>
+  <url>
+    <loc>http://aliencode.me/404.html</loc>
+  </url>
+  <url>
+    <loc>http://aliencode.me/about/</loc>
+  </url>
+  <url>
+    <loc>http://aliencode.me/archive.html</loc>
+  </url>
+  <url>
+    <loc>http://aliencode.me/categories.html</loc>
+  </url>
+  <url>
+    <loc>http://aliencode.me/</loc>
+  </url>
+  <url>
+    <loc>http://aliencode.me/list.html</loc>
+  </url>
+  <url>
+    <loc>http://aliencode.me/tags.html</loc>
+  </url>
+</urlset>

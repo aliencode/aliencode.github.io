@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="aliencode.me">
+    <meta name="keywords" content="aliencode.me">
+    <meta name="author" content="aliencode">
+    <link href="/feed.xml" type="application/rss+xml"  />
+    <title>aliencode.me</title>
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+</head>
+<body>
+
+<div class="header">
+    <a href="/"><img class="logo" src="/images/me.png"></a>
+    <div></div>
+    <div class="logo-title">aliencode</div>
+    <div class="sub-title">一个安静的地方和一些过往的东西</div>
+
+    <ul class="mainmenu">
+        <!--<li><a href="/">首页</a></li>-->
+        <li><a href="/list.html">列表</a></li>
+        <li><a href="/categories.html">分类</a></li>
+        <li><a href="/tags.html">标签</a></li>
+        <li><a href="/archive.html">归档</a></li>
+        <li><a href="/feed.xml" target="_blank">RSS</a></li>
+    </ul>
+    <div class="footer">
+        &copy; aliencode.me All Rights Reserved. <br/>
+        themed by <a href="http://aliencode.me">Jekyll-Strip</a>
+    </div>
+</div>
+<div class="wrapper">
+    <article class="post">
+  <h1>Maven使用笔记</h1>
+  <div class="meta">
+    
+        <span class="categories">
+          <span class="icon-bookmark" title="Categories"></span>
+          
+          <a href="/categories.html#笔记" title="笔记">笔记</a>
+          
+        </span>
+    
+    &nbsp;&nbsp;
+    
+        <span class="tags">
+          <span class="icon-tags" title="Tags"></span>
+          
+          <a href="/tags.html#maven" title="maven">#maven</a>&nbsp;
+          
+        </span>
+    
+  </div>
+  <div class="entry">
+    <p>使用Maven有一段时间了，用它做过几个项目的构建工具，感觉还是非常不错的，省去很多不必要的麻烦，比如jar包的依赖管理，升级等，还可以处理一些繁杂的事务，比如简单的代码生成，数据导入导出等。当然这里有一定的学习成本！
+本文就一些常规使用做了介绍，包括一些需要注意的地方和本人常人的配置插件等。</p>
+
+<p>特别说明，由于settings.xml是针对全局或个人的设置，不能随项目走，所以本文基本没有说到settings.xml的配置。</p>
+
+<h2>Maven一般目录结构</h2>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">.
+pom.xml
+src
+   |-main
+         |-java
+         |-resources
+         |-webapp
+   |-test
+         |-java
+         |-resources
+target</code></pre></div>
+
+<h2>Maven属性设置</h2>
+
+<h3>项目属性配置</h3>
+
+<p><em>加＊项是建项目必要属性</em></p>
+
+<table><thead>
+<tr>
+<th>属性名称</th>
+<th>描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>groupId *</td>
+<td>当前项目隶属的上级项目ID，一般是系列相关子项目的组ID，如：org.springframework</td>
+</tr>
+<tr>
+<td>artifactId *</td>
+<td>当前项目模块ID，一般为实际项目ID，如：spring-web</td>
+</tr>
+<tr>
+<td>version *</td>
+<td>此项目模块的版本</td>
+</tr>
+<tr>
+<td>packaging</td>
+<td>项目类型，jar或war，默认为jar</td>
+</tr>
+<tr>
+<td>name</td>
+<td>项目名称，如果跟IDE配合使用时IDE会识别此名称</td>
+</tr>
+<tr>
+<td>description</td>
+<td>项目描述</td>
+</tr>
+<tr>
+<td>organization</td>
+<td>所属组织</td>
+</tr>
+<tr>
+<td>licenses</td>
+<td>许可协议</td>
+</tr>
+<tr>
+<td>mailingLists</td>
+<td>邮件列表</td>
+</tr>
+<tr>
+<td>developers</td>
+<td>开发者</td>
+</tr>
+<tr>
+<td>contributors</td>
+<td>贡献者</td>
+</tr>
+<tr>
+<td>issueManagement</td>
+<td>问题追踪系统</td>
+</tr>
+<tr>
+<td>ciManagement</td>
+<td>持续集成系统</td>
+</tr>
+<tr>
+<td>scm</td>
+<td>版本控制系统</td>
+</tr>
+</tbody></table>
+
+<h3>POM一般属性变量</h3>
+
+<table><thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>${basedir}</td>
+<td>项目根目录，包含pom.xml文件的目录</td>
+</tr>
+<tr>
+<td>${version}</td>
+<td>项目的版本</td>
+</tr>
+<tr>
+<td>${pom.build.sourceDirectory}</td>
+<td>项目的主源码目录，默认为：src/main/java</td>
+</tr>
+<tr>
+<td>${pom.build.testSourceDiretory}</td>
+<td>项目的测试源码目录， 默认为：src/test/java</td>
+</tr>
+<tr>
+<td>${pom.build.directory}</td>
+<td>项目构建输出目录,默认为target</td>
+</tr>
+<tr>
+<td>${pom.outputDirectory}</td>
+<td>项目主代码编译输出目录，默认为: target/classess</td>
+</tr>
+<tr>
+<td>${pom.testOutputDirectory}</td>
+<td>项目主代码编译输出目录，默认为: target/test-classess</td>
+</tr>
+<tr>
+<td>${pom.groupId}</td>
+<td>项目的groupId</td>
+</tr>
+<tr>
+<td>${pom.artifactId}</td>
+<td>项目的artifactId</td>
+</tr>
+<tr>
+<td>${pom.version}</td>
+<td>项目的版本</td>
+</tr>
+<tr>
+<td>${pom.build.finalName}</td>
+<td>项目打包输出文件的名称，默认为${pom.artifactId}-${pom.version}</td>
+</tr>
+</tbody></table>
+
+<p>以上build属性可通过pom.xml文件中build结点指定如：</p>
+<div class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;build&gt;</span>
+    <span class="nt">&lt;directory&gt;</span>${pom.basedir}/target<span class="nt">&lt;/directory&gt;</span>
+    <span class="nt">&lt;outputDirectory&gt;</span>${pom.build.directory}/classes<span class="nt">&lt;/outputDirectory&gt;</span>
+    <span class="nt">&lt;finalName&gt;</span>${pom.artifactId}-${pom.version}<span class="nt">&lt;/finalName&gt;</span>
+    <span class="nt">&lt;testOutputDirectory&gt;</span>${pom.build.directory}/test-classes<span class="nt">&lt;/testOutputDirectory&gt;</span>
+    <span class="nt">&lt;sourceDirectory&gt;</span>${pom.basedir}/src/main/java<span class="nt">&lt;/sourceDirectory&gt;</span>
+    <span class="nt">&lt;scriptSourceDirectory&gt;</span>src/main/scripts<span class="nt">&lt;/scriptSourceDirectory&gt;</span>
+    <span class="nt">&lt;testSourceDirectory&gt;</span>${pom.basedir}/src/test/java<span class="nt">&lt;/testSourceDirectory&gt;</span>
+    <span class="nt">&lt;resources&gt;</span>
+      <span class="nt">&lt;resource&gt;</span>
+        <span class="nt">&lt;directory&gt;</span>${pom.basedir}/src/main/resources<span class="nt">&lt;/directory&gt;</span>
+      <span class="nt">&lt;/resource&gt;</span>
+    <span class="nt">&lt;/resources&gt;</span>
+    <span class="nt">&lt;testResources&gt;</span>
+      <span class="nt">&lt;testResource&gt;</span>
+        <span class="nt">&lt;directory&gt;</span>${pom.basedir}/src/test/resources<span class="nt">&lt;/directory&gt;</span>
+      <span class="nt">&lt;/testResource&gt;</span>
+    <span class="nt">&lt;/testResources&gt;</span>
+<span class="nt">&lt;build&gt;</span>
+</code></pre></div>
+<p>更多内容：<a href="http://docs.codehaus.org/display/MAVENUSER/MavenPropertiesGuide">MavenPropertiesGuide</a></p>
+
+<h3>自定义属性变量</h3>
+
+<p>在根结点增加：</p>
+
+<div class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="lineno">1</span> <span class="nt">&lt;projecties&gt;</span>
+<span class="lineno">2</span>     <span class="nt">&lt;spring.version&gt;</span>3.1-RELEASE<span class="nt">&lt;/spring.version&gt;</span>
+<span class="lineno">3</span>     <span class="nt">&lt;hibernate.version&gt;</span>4.2-FINAL<span class="nt">&lt;/hibernate.version&gt;</span>
+<span class="lineno">4</span>     <span class="c">&lt;!-- 使用${spring.version}读取 --&gt;</span>
+<span class="lineno">5</span> <span class="nt">&lt;/projecties&gt;</span></code></pre></div>
+
+<h3>资源文件使用Maven变量</h3>
+
+<p>如有文件 <code>src/main/resources/application.properties</code>：</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">#application.properties
+application.name=${pom.name}
+application.version=${pom.version}</code></pre></div>
+
+<p>执行命令：<code>mvn process-resources</code> maven会给其中的亦是赋值：</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">#application.properties
+application.name=Maven Quick Start Archetype
+application.version=1.0-SNAPSHOT</code></pre></div>
+
+<p>更多内容：<a href="http://maven.apache.org/guides/getting-started/index.html#How_do_I_filter_resource_files">http://maven.apache.org/guides/getting-started/index.html</a></p>
+
+<h2>Maven依赖管理</h2>
+
+<h3>自定义源地址</h3>
+
+<p>如在maven的中央仓库中没有你要用的jar包，通过自定义源解决：</p>
+
+<div class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="lineno"> 1</span> <span class="nt">&lt;repositories&gt;</span>
+<span class="lineno"> 2</span>  <span class="nt">&lt;repository&gt;</span>
+<span class="lineno"> 3</span>      <span class="nt">&lt;id&gt;</span>central<span class="nt">&lt;/id&gt;</span>
+<span class="lineno"> 4</span>      <span class="nt">&lt;name&gt;</span>Maven Repository Switchboard<span class="nt">&lt;/name&gt;</span>
+<span class="lineno"> 5</span>      <span class="nt">&lt;layout&gt;</span>default<span class="nt">&lt;/layout&gt;</span>
+<span class="lineno"> 6</span>      <span class="nt">&lt;url&gt;</span>http://repo1.maven.org/maven2<span class="nt">&lt;/url&gt;</span>
+<span class="lineno"> 7</span>      <span class="nt">&lt;snapshots&gt;</span>
+<span class="lineno"> 8</span>      <span class="nt">&lt;enabled&gt;</span>false<span class="nt">&lt;/enabled&gt;</span>
+<span class="lineno"> 9</span>      <span class="nt">&lt;/snapshots&gt;</span>
+<span class="lineno">10</span>  <span class="nt">&lt;/repository&gt;</span>
+<span class="lineno">11</span> <span class="nt">&lt;/repositories&gt;</span></code></pre></div>
+
+<h3>排除依赖和子项目依赖</h3>
+
+<div class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="lineno"> 1</span> <span class="c">&lt;!-- 子项目，被依赖的子项目必须经过maven的install安装，不然maven还是找不到！ --&gt;</span>
+<span class="lineno"> 2</span> <span class="nt">&lt;groupId&gt;</span>bgonline<span class="nt">&lt;/groupId&gt;</span>
+<span class="lineno"> 3</span> <span class="nt">&lt;artifactId&gt;</span>foundation<span class="nt">&lt;/artifactId&gt;</span>
+<span class="lineno"> 4</span> <span class="nt">&lt;version&gt;</span>1.0.0<span class="nt">&lt;/version&gt;</span>
+<span class="lineno"> 5</span> <span class="c">&lt;!-- 排除 --&gt;</span>
+<span class="lineno"> 6</span> <span class="nt">&lt;exclusions&gt;</span>
+<span class="lineno"> 7</span>     <span class="nt">&lt;exclusion&gt;</span>
+<span class="lineno"> 8</span>         <span class="nt">&lt;groupId&gt;</span>log4j<span class="nt">&lt;/groupId&gt;</span>
+<span class="lineno"> 9</span>         <span class="nt">&lt;artifactId&gt;</span>log4j<span class="nt">&lt;/artifactId&gt;</span>
+<span class="lineno">10</span>     <span class="nt">&lt;/exclusion&gt;</span>
+<span class="lineno">11</span> <span class="nt">&lt;/exclusions&gt;</span></code></pre></div>
+
+<h3>本地JAR包安装</h3>
+
+<p><strong>安装jar文件</strong></p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">call mvn install:install-file -Dfile=xxx-1.0.0.jar -DgroupId=com.xx -DartifactId=xx -Dversion=1.0.0 -Dpackaging=jar</code></pre></div>
+
+<p><strong>安装pom文件</strong></p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">call mvn install:install-file -Dfile=xxx-1.0.0.pom.xml -DgroupId=com.xx -DartifactId=xx -Dversion=1.0.0 -Dpackaging=pom</code></pre></div>
+
+<h2>Maven插件管理</h2>
+
+<h3>添加插件：</h3>
+
+<div class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="lineno"> 1</span> <span class="nt">&lt;build&gt;</span>
+<span class="lineno"> 2</span>  <span class="nt">&lt;pluginManagement&gt;</span>
+<span class="lineno"> 3</span>      <span class="nt">&lt;plugins&gt;</span>
+<span class="lineno"> 4</span>          <span class="nt">&lt;plugin&gt;</span>
+<span class="lineno"> 5</span>              <span class="nt">&lt;artifactId&gt;</span>maven-antrun-plugin<span class="nt">&lt;/artifactId&gt;</span>
+<span class="lineno"> 6</span>              <span class="nt">&lt;version&gt;</span>1.3<span class="nt">&lt;/version&gt;</span>
+<span class="lineno"> 7</span>          <span class="nt">&lt;/plugin&gt;</span>
+<span class="lineno"> 8</span>      <span class="nt">&lt;/plugins&gt;</span>
+<span class="lineno"> 9</span>  <span class="nt">&lt;/pluginManagement&gt;</span>
+<span class="lineno">10</span> <span class="nt">&lt;/build&gt;</span></code></pre></div>
+
+<h3>自定义插件源</h3>
+
+<div class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="lineno"> 1</span> <span class="nt">&lt;pluginRepositories&gt;</span>
+<span class="lineno"> 2</span>  <span class="nt">&lt;pluginRepository&gt;</span>
+<span class="lineno"> 3</span>      <span class="nt">&lt;id&gt;</span>central<span class="nt">&lt;/id&gt;</span>
+<span class="lineno"> 4</span>      <span class="nt">&lt;name&gt;</span>Maven Plugin Repository<span class="nt">&lt;/name&gt;</span>
+<span class="lineno"> 5</span>      <span class="nt">&lt;url&gt;</span>http://repo1.maven.org/maven2<span class="nt">&lt;/url&gt;</span>
+<span class="lineno"> 6</span>      <span class="nt">&lt;layout&gt;</span>default<span class="nt">&lt;/layout&gt;</span>
+<span class="lineno"> 7</span>      <span class="nt">&lt;snapshots&gt;</span>
+<span class="lineno"> 8</span>          <span class="nt">&lt;enabled&gt;</span>false<span class="nt">&lt;/enabled&gt;</span>
+<span class="lineno"> 9</span>      <span class="nt">&lt;/snapshots&gt;</span>
+<span class="lineno">10</span>      <span class="nt">&lt;releases&gt;</span>
+<span class="lineno">11</span>          <span class="nt">&lt;updatePolicy&gt;</span>never<span class="nt">&lt;/updatePolicy&gt;</span>
+<span class="lineno">12</span>      <span class="nt">&lt;/releases&gt;</span>
+<span class="lineno">13</span>  <span class="nt">&lt;/pluginRepository&gt;</span>
+<span class="lineno">14</span> <span class="nt">&lt;/pluginRepositories&gt;</span></code></pre></div>
+
+<h3>常用插件</h3>
+
+<table><thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>jetty-maven-plugin</td>
+<td>jetty插件，轻量级web容器，推荐阶段开发使用</td>
+</tr>
+<tr>
+<td>maven-antrun-plugin</td>
+<td>跑ant命令插件，常用来做文件处理，sql执行等，基本包括ant所有功能</td>
+</tr>
+<tr>
+<td>native2ascii-maven-plugin</td>
+<td>转ascii，如多语言配置文件的中文转成ascii码解决乱码问题</td>
+</tr>
+<tr>
+<td>versions-maven-plugin</td>
+<td>检测所有依赖的更新情况</td>
+</tr>
+<tr>
+<td>maven-surefire-plugin</td>
+<td>生成测试报告，配全Testng，指定单元测试的配置文件，进行分组、分类、分包测试，可参考Testng文档说明</td>
+</tr>
+</tbody></table>
+
+<p>更多内容：<a href="http://maven.apache.org/plugins/index.html">plugins</a></p>
+
+<h2>Maven Profile使用</h2>
+
+<p>有时候会根据不同的情况执行不现的构建命令，这就用到maven的profile，profile可以直接写在pom.xml里也可以被提出到独立文件profiles.xml同pom.xml同级目录或settings.xml，但Maven3只支持写在pom.xml文件里，why？！</p>
+
+<p>1.使用profile+ant执行sql做数据初始化：</p>
+
+<div class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="lineno"> 1</span> <span class="nt">&lt;profile&gt;</span>
+<span class="lineno"> 2</span>     <span class="nt">&lt;id&gt;</span>INIT-DB-DATA<span class="nt">&lt;/id&gt;</span>
+<span class="lineno"> 3</span>     <span class="nt">&lt;build&gt;</span>
+<span class="lineno"> 4</span>         <span class="nt">&lt;plugins&gt;</span>
+<span class="lineno"> 5</span>             <span class="nt">&lt;plugin&gt;</span>
+<span class="lineno"> 6</span>                 <span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
+<span class="lineno"> 7</span>                 <span class="nt">&lt;artifactId&gt;</span>maven-antrun-plugin<span class="nt">&lt;/artifactId&gt;</span>
+<span class="lineno"> 8</span>                 <span class="nt">&lt;configuration&gt;</span>
+<span class="lineno"> 9</span>                     <span class="nt">&lt;target&gt;</span>
+<span class="lineno">10</span>                         <span class="nt">&lt;sql</span> <span class="na">driver=</span><span class="s">&quot;${jdbc.driver}&quot;</span> <span class="na">url=</span><span class="s">&quot;${jdbc.url}&quot;</span> <span class="na">userid=</span><span class="s">&quot;${jdbc.username}&quot;</span> <span class="na">password=</span><span class="s">&quot;${jdbc.password}&quot;</span> <span class="na">onerror=</span><span class="s">&quot;continue&quot;</span><span class="nt">&gt;</span>
+<span class="lineno">11</span>                             <span class="nt">&lt;classpath</span> <span class="na">refid=</span><span class="s">&quot;maven.runtime.classpath&quot;</span><span class="nt">/&gt;</span>
+<span class="lineno">12</span>                             <span class="nt">&lt;transaction</span> <span class="na">src=</span><span class="s">&quot;src/main/resources/sql/${jdbc.direct}/schema.sql&quot;</span><span class="nt">/&gt;</span>
+<span class="lineno">13</span>                         <span class="nt">&lt;/sql&gt;</span>
+<span class="lineno">14</span>                     <span class="nt">&lt;/target&gt;</span>
+<span class="lineno">15</span>                 <span class="nt">&lt;/configuration&gt;</span>
+<span class="lineno">16</span>             <span class="nt">&lt;/plugin&gt;</span>
+<span class="lineno">17</span>         <span class="nt">&lt;/plugins&gt;</span>
+<span class="lineno">18</span>     <span class="nt">&lt;/build&gt;</span>
+<span class="lineno">19</span> <span class="nt">&lt;/profile&gt;</span></code></pre></div>
+
+<p>2.使用maven profile ant hibernate-tools生成类bean：</p>
+
+<div class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="lineno"> 1</span> <span class="nt">&lt;profile&gt;</span>
+<span class="lineno"> 2</span>     <span class="nt">&lt;id&gt;</span>Gen-Java-Bean<span class="nt">&lt;/id&gt;</span>
+<span class="lineno"> 3</span>     <span class="nt">&lt;build&gt;</span>
+<span class="lineno"> 4</span>         <span class="nt">&lt;plugins&gt;</span>
+<span class="lineno"> 5</span>             <span class="nt">&lt;plugin&gt;</span>
+<span class="lineno"> 6</span>                 <span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
+<span class="lineno"> 7</span>                 <span class="nt">&lt;artifactId&gt;</span>maven-antrun-plugin<span class="nt">&lt;/artifactId&gt;</span>
+<span class="lineno"> 8</span>                 <span class="nt">&lt;configuration&gt;</span>
+<span class="lineno"> 9</span>                     <span class="nt">&lt;target&gt;</span>
+<span class="lineno">10</span>                         <span class="nt">&lt;echo</span> <span class="na">message=</span><span class="s">&quot;生成表ENTITY类……&quot;</span><span class="nt">/&gt;</span>
+<span class="lineno">11</span>                         <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;toolsDir&quot;</span> <span class="na">value=</span><span class="s">&quot;src/test/tools&quot;</span><span class="nt">/&gt;</span>
+<span class="lineno">12</span>                         <span class="c">&lt;!-- 这里需要指定hibernatetool相关jar包，自行下载 --&gt;</span>
+<span class="lineno">13</span>                         <span class="nt">&lt;path</span> <span class="na">id=</span><span class="s">&quot;lib.class.path&quot;</span><span class="nt">&gt;</span>
+<span class="lineno">14</span>                             <span class="nt">&lt;fileset</span> <span class="na">dir=</span><span class="s">&quot;${toolsDir}/lib&quot;</span><span class="nt">&gt;</span>
+<span class="lineno">15</span>                                 <span class="nt">&lt;include</span> <span class="na">name=</span><span class="s">&quot;*.jar&quot;</span><span class="nt">/&gt;</span>
+<span class="lineno">16</span>                             <span class="nt">&lt;/fileset&gt;</span>
+<span class="lineno">17</span>                         <span class="nt">&lt;/path&gt;</span>
+<span class="lineno">18</span>                         <span class="nt">&lt;taskdef</span> <span class="na">name=</span><span class="s">&quot;hibernatetool&quot;</span> <span class="na">classname=</span><span class="s">&quot;org.hibernate.tool.ant.HibernateToolTask&quot;</span> <span class="na">classpathref=</span><span class="s">&quot;lib.class.path&quot;</span><span class="nt">/&gt;</span>
+<span class="lineno">19</span>                         <span class="nt">&lt;hibernatetool</span> <span class="na">destdir=</span><span class="s">&quot;${toolsDir}/lib/build&quot;</span><span class="nt">&gt;</span>
+<span class="lineno">20</span>                             <span class="nt">&lt;jdbcconfiguration</span> <span class="na">propertyfile=</span><span class="s">&quot;${toolsDir}/lib/cfg/jdbc.properties&quot;</span> <span class="na">revengfile=</span><span class="s">&quot;${toolsDir}/lib/cfg/hibernate.reveng.xml&quot;</span><span class="nt">/&gt;</span>
+<span class="lineno">21</span>                             <span class="c">&lt;!-- 指定hibernatetools生成bean的模板，根据自己需要定制生成内容，用的freemarker引擎，在hibernate-tools.jar包里有默认模板 --&gt;</span>
+<span class="lineno">22</span>                             <span class="nt">&lt;hbmtemplate</span>
+<span class="lineno">23</span>                                     <span class="na">destdir=</span><span class="s">&quot;${toolsDir}/lib/build&quot;</span>
+<span class="lineno">24</span>                                     <span class="na">templatepath=</span><span class="s">&quot;${basedir}/${toolsDir}/lib/hbmtemplates/&quot;</span>
+<span class="lineno">25</span>                                     <span class="na">templateprefix=</span><span class="s">&quot;/hbmtemplates&quot;</span>
+<span class="lineno">26</span>                                     <span class="na">filepattern=</span><span class="s">&quot;{class-name}Entity.java&quot;</span>
+<span class="lineno">27</span>                                     <span class="na">template=</span><span class="s">&quot;pojo2/Pojo.ftl&quot;</span><span class="nt">&gt;</span>
+<span class="lineno">28</span>                                 <span class="nt">&lt;property</span> <span class="na">key=</span><span class="s">&quot;ejb3&quot;</span> <span class="na">value=</span><span class="s">&quot;false&quot;</span><span class="nt">/&gt;</span>
+<span class="lineno">29</span>                                 <span class="nt">&lt;property</span> <span class="na">key=</span><span class="s">&quot;jdk5&quot;</span> <span class="na">value=</span><span class="s">&quot;false&quot;</span><span class="nt">/&gt;</span>
+<span class="lineno">30</span>                             <span class="nt">&lt;/hbmtemplate&gt;</span>
+<span class="lineno">31</span>                             <span class="c">&lt;!-- 或者直接 &lt;hbm2java/&gt; 只是这样使用的是默认模板 --&gt;</span>
+<span class="lineno">32</span>                         <span class="nt">&lt;/hibernatetool&gt;</span>
+<span class="lineno">33</span>                     <span class="nt">&lt;/target&gt;</span>
+<span class="lineno">34</span>                 <span class="nt">&lt;/configuration&gt;</span>
+<span class="lineno">35</span>             <span class="nt">&lt;/plugin&gt;</span>
+<span class="lineno">36</span>         <span class="nt">&lt;/plugins&gt;</span>
+<span class="lineno">37</span>     <span class="nt">&lt;/build&gt;</span>
+<span class="lineno">38</span> <span class="nt">&lt;/profile&gt;</span></code></pre></div>
+
+<p>更多内容：<a href="http://maven.apache.org/guides/introduction/introduction-to-profiles.html">profiles.html</a></p>
+
+<h2>Maven多项目配置</h2>
+
+<p>创建如下目录结构：</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">+- pom.xml 父
+    +- my-app
+    | +- pom.xml 子1，jar类型
+    | +- src
+    |   +- main
+    |     +- java
+    +- my-webapp
+    | +- pom.xml 子2，webapp类型
+    | +- src
+    |   +- main
+    |     +- webapp</code></pre></div>
+
+<p>父pom内容如下：</p>
+
+<div class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="lineno"> 1</span> <span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0&quot;</span> <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span> <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span><span class="nt">&gt;</span>
+<span class="lineno"> 2</span>   <span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
+<span class="lineno"> 3</span>   <span class="nt">&lt;groupId&gt;</span>com.mycompany.app<span class="nt">&lt;/groupId&gt;</span>
+<span class="lineno"> 4</span>   <span class="nt">&lt;artifactId&gt;</span>app<span class="nt">&lt;/artifactId&gt;</span>
+<span class="lineno"> 5</span>   <span class="nt">&lt;version&gt;</span>1.0-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
+<span class="lineno"> 6</span>   <span class="nt">&lt;packaging&gt;</span>pom<span class="nt">&lt;/packaging&gt;</span>
+<span class="lineno"> 7</span> 
+<span class="lineno"> 8</span>   <span class="nt">&lt;modules&gt;</span>
+<span class="lineno"> 9</span>     <span class="nt">&lt;module&gt;</span>my-app<span class="nt">&lt;/module&gt;</span>
+<span class="lineno">10</span>     <span class="nt">&lt;module&gt;</span>my-webapp<span class="nt">&lt;/module&gt;</span>
+<span class="lineno">11</span>   <span class="nt">&lt;/modules&gt;</span>
+<span class="lineno">12</span> <span class="nt">&lt;/project&gt;</span></code></pre></div>
+
+<p><em>注：</em>一些项目全局属性可在此pom文件中设置，比如项目信息，所有依赖等，这样在子项目就不用重复申明，如依赖可省掉版本号，直接使用父pom中的版本，这样可以统一管理所有项目的依赖版本。</p>
+
+<p>子1的pom内容如下：</p>
+
+<div class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="lineno"> 1</span> <span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0&quot;</span> <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span> <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span><span class="nt">&gt;</span>
+<span class="lineno"> 2</span>     <span class="nt">&lt;groupId&gt;</span>com.mycompany.app<span class="nt">&lt;/groupId&gt;</span>
+<span class="lineno"> 3</span>     <span class="nt">&lt;artifactId&gt;</span>app-jar<span class="nt">&lt;/artifactId&gt;</span>
+<span class="lineno"> 4</span>     <span class="nt">&lt;packaging&gt;</span>jar<span class="nt">&lt;/packaging&gt;</span>
+<span class="lineno"> 5</span>     <span class="nt">&lt;parent&gt;</span>
+<span class="lineno"> 6</span>         <span class="nt">&lt;groupId&gt;</span>com.mycompany.app<span class="nt">&lt;/groupId&gt;</span>
+<span class="lineno"> 7</span>         <span class="nt">&lt;artifactId&gt;</span>app<span class="nt">&lt;/artifactId&gt;</span>
+<span class="lineno"> 8</span>         <span class="nt">&lt;version&gt;</span>1.0-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
+<span class="lineno"> 9</span>     <span class="nt">&lt;/parent&gt;</span>
+<span class="lineno">10</span>     ...</code></pre></div>
+
+<p>子2的pom内容如下：</p>
+
+<div class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="lineno"> 1</span> <span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0&quot;</span> <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span> <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span><span class="nt">&gt;</span>
+<span class="lineno"> 2</span>     <span class="nt">&lt;groupId&gt;</span>com.mycompany.app<span class="nt">&lt;/groupId&gt;</span>
+<span class="lineno"> 3</span>     <span class="nt">&lt;artifactId&gt;</span>app-war<span class="nt">&lt;/artifactId&gt;</span>
+<span class="lineno"> 4</span>     <span class="nt">&lt;packaging&gt;</span>war<span class="nt">&lt;/packaging&gt;</span>
+<span class="lineno"> 5</span>     <span class="nt">&lt;parent&gt;</span>
+<span class="lineno"> 6</span>         <span class="nt">&lt;groupId&gt;</span>com.mycompany.app<span class="nt">&lt;/groupId&gt;</span>
+<span class="lineno"> 7</span>         <span class="nt">&lt;artifactId&gt;</span>app<span class="nt">&lt;/artifactId&gt;</span>
+<span class="lineno"> 8</span>         <span class="nt">&lt;version&gt;</span>1.0-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
+<span class="lineno"> 9</span>     <span class="nt">&lt;/parent&gt;</span>
+<span class="lineno">10</span>     ...</code></pre></div>
+
+<p>子2需要依赖子1，配置如下：</p>
+
+<div class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="lineno">1</span> ...
+<span class="lineno">2</span> <span class="nt">&lt;dependencies&gt;</span>
+<span class="lineno">3</span> <span class="nt">&lt;dependency&gt;</span>
+<span class="lineno">4</span>     <span class="nt">&lt;groupId&gt;</span>com.mycompany.app<span class="nt">&lt;/groupId&gt;</span>
+<span class="lineno">5</span>     <span class="nt">&lt;artifactId&gt;</span>my-app<span class="nt">&lt;/artifactId&gt;</span>
+<span class="lineno">6</span>     <span class="nt">&lt;version&gt;</span>1.0-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
+<span class="lineno">7</span> <span class="nt">&lt;/dependency&gt;</span>
+<span class="lineno">8</span> ...
+<span class="lineno">9</span> <span class="nt">&lt;/dependencies&gt;</span></code></pre></div>
+
+<p>最后在父pom所在目录执行<code>mvn clean install</code>命令，jar包会被安装本地仓库，war会被发布到target目录。</p>
+
+<h2>Maven创建项目</h2>
+
+<h3>创建java项目</h3>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">mvn archetype:generate \
+      -DarchetypeGroupId=org.apache.maven.archetypes \
+      -DgroupId=com.mycompany.app \
+      -DartifactId=my-app</code></pre></div>
+
+<p>生成的目录结构：</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">my-app
+    |-- pom.xml
+    `-- src
+        |-- main
+        |   `-- java
+        |       `-- com
+        |           `-- mycompany
+        |               `-- app
+        |                   `-- App.java
+        `-- test
+            `-- java
+                `-- com
+                    `-- mycompany
+                        `-- app
+                            `-- AppTest.java</code></pre></div>
+
+<h3>创建java webapp</h3>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">mvn archetype:generate \
+    -DarchetypeGroupId=org.apache.maven.archetypes \
+    -DarchetypeArtifactId=maven-archetype-webapp \
+    -DgroupId=com.mycompany.app \
+    -DartifactId=my-webapp</code></pre></div>
+
+<p>生成的目录结构：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">+- my-webapp
+| +- pom.xml
+| +- src
+|   +- main
+|     +- resources
+|     +- webapp
+|       +- index.jsp
+|       +- WEB-INF
+|         +- web.xml
+</code></pre></div>
+<p>之后根据需要在main下创建java目录，在src创建test目录。</p>
+
+<h2>生命周期常用命令</h2>
+
+<ol>
+<li>编译 <code>mvn compile</code>，编译测试 <code>mvn test-compile</code>,不执行测试，仅编译</li>
+<li>测试 <code>mvn test</code>，执行测试</li>
+<li>打包 <code>mvn package</code>，java项目打成jar包，web项目打包war包</li>
+<li>安装 <code>mvn install</code>，将自己java项目生成的jar包安装到本地仓库</li>
+<li>站点 <code>mvn site</code>，根据pom.xml配置信息生成项目相关的站点在target/site</li>
+<li>清除 <code>mvn clean</code>，将target目录下build后的内容删除</li>
+</ol>
+
+<p>更多内容：<a href="http://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html">lifecycle.html</a></p>
+
+<h2>更多Maven参考</h2>
+
+<ul>
+<li>POM详细说明文档 ：<a href="http://maven.apache.org/pom.html">http://maven.apache.org/pom.html</a></li>
+<li>POM说明3.0.5版：<a href="http://maven.apache.org/ref/3.0.5/maven-model/maven.html">http://maven.apache.org/ref/3.0.5/maven-model/maven.html</a></li>
+<li>Maven-3.0.5文档：<a href="http://maven.apache.org/ref/3.0.5/">http://maven.apache.org/ref/3.0.5/</a></li>
+<li>maven.apache.org：<a href="http://maven.apache.org/guides/getting-started/">http://maven.apache.org/guides/getting-started/</a></li>
+<li>docs.codehaus.org：<a href="http://docs.codehaus.org/display/MAVENUSER">http://docs.codehaus.org/display/MAVENUSER</a></li>
+</ul>
+
+  </div>
+
+  
+  <div id="page_nav">
+    <div class="split">
+    <i>上一篇 / 下一篇</i>
+    <hr/>
+    </div>
+    <div>
+      
+      <li><a href='/maven-install-jar-local/'>Maven安装jar包到本地仓库</a></li>
+      
+    </div>
+    <div>
+      
+    </div>
+  </div>
+  
+
+  <div class="relatedposts">
+    <div class="split">
+    <i>相关内容</i>
+    <hr/>
+    </div>
+    <!--使用tag做为相关阅读，，也可以使用 category-->
+    
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="/github-pages-blog/">再次用Github-Pages建立自己的独立博客</a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="/go-lang-install/">GO语言的安装和简单的使用体验</a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="/maven-install-jar-local/">Maven安装jar包到本地仓库</a></li>
+    
+    
+  </div>
+
+  <div class="copyright" style="text-align: right;padding-top: 20px">
+      本文永久链接地址：<a title="Maven使用笔记" href="http://aliencode.me/maven/">http://aliencode.me/maven/</a>, 转载请注明来源！<br />
+  </div>
+
+  <div class="date" style="text-align: right;color: #ccc">
+    Written on 2013, 05, 01
+  </div>
+
+  
+
+  
+
+
+
+</article>
+
+
+</div>
+
+</body>

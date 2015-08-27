@@ -1,1 +1,0 @@
-. link:index.html[GO语言简单的体验笔记, role="date:2014-11-13"]

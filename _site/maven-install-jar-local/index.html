@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="aliencode.me">
+    <meta name="keywords" content="aliencode.me">
+    <meta name="author" content="aliencode">
+    <link href="/feed.xml" type="application/rss+xml"  />
+    <title>aliencode.me</title>
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+</head>
+<body>
+
+<div class="header">
+    <a href="/"><img class="logo" src="/images/me.png"></a>
+    <div></div>
+    <div class="logo-title">aliencode</div>
+    <div class="sub-title">一个安静的地方和一些过往的东西</div>
+
+    <ul class="mainmenu">
+        <!--<li><a href="/">首页</a></li>-->
+        <li><a href="/list.html">列表</a></li>
+        <li><a href="/categories.html">分类</a></li>
+        <li><a href="/tags.html">标签</a></li>
+        <li><a href="/archive.html">归档</a></li>
+        <li><a href="/feed.xml" target="_blank">RSS</a></li>
+    </ul>
+    <div class="footer">
+        &copy; aliencode.me All Rights Reserved. <br/>
+        themed by <a href="http://aliencode.me">Jekyll-Strip</a>
+    </div>
+</div>
+<div class="wrapper">
+    <article class="post">
+  <h1>Maven安装jar包到本地仓库</h1>
+  <div class="meta">
+    
+        <span class="categories">
+          <span class="icon-bookmark" title="Categories"></span>
+          
+          <a href="/categories.html#笔记" title="笔记">笔记</a>
+          
+        </span>
+    
+    &nbsp;&nbsp;
+    
+        <span class="tags">
+          <span class="icon-tags" title="Tags"></span>
+          
+          <a href="/tags.html#maven" title="maven">#maven</a>&nbsp;
+          
+        </span>
+    
+  </div>
+  <div class="entry">
+    <p>在项目开发期间难免遇遭使用的jar包在Maven的中央仓库里没有，比如那个固执的Oracle，这家伙始终不愿意把ojdbc驱动提交到Maven仓库，这件事很郁闷，Maven又不支持引入本地jar文件如果用IDE强行引入在Maven编译的时候又无法通过。</p>
+
+<p>Maven官方提供导入本地jar文件到本地仓库的<a href="http://maven.apache.org/plugins/maven-install-plugin/">maven-install-plugin</a>，可是要用的时候又得苦逼的去找命令，用起来也比较麻烦，因此，本文详细介绍一下maven-install-plugin插件的使用，可以导入任意数量的jar文件到本地仓库，是不是很开心那！</p>
+
+<h2>配置POM</h2>
+
+<p>Maven插件<a href="http://maven.apache.org/plugins/maven-install-plugin/">maven-install-plugin</a></p>
+<div class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;plugin&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>maven-install-plugin<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>2.4<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;inherited&gt;</span>false<span class="nt">&lt;/inherited&gt;</span>
+    <span class="nt">&lt;executions&gt;</span>
+        <span class="nt">&lt;execution&gt;</span>
+            <span class="nt">&lt;id&gt;</span>install-artifacts.1<span class="nt">&lt;/id&gt;</span>
+            <span class="nt">&lt;goals&gt;</span>
+                <span class="nt">&lt;goal&gt;</span>install-file<span class="nt">&lt;/goal&gt;</span>
+            <span class="nt">&lt;/goals&gt;</span>
+            <span class="nt">&lt;phase&gt;</span>validate<span class="nt">&lt;/phase&gt;</span>
+            <span class="nt">&lt;configuration&gt;</span>
+                <span class="nt">&lt;file&gt;</span>${basedir}/libs/ojdbc14.jar<span class="nt">&lt;/file&gt;</span>
+                <span class="nt">&lt;groupId&gt;</span>org.oracle<span class="nt">&lt;/groupId&gt;</span>
+                <span class="nt">&lt;artifactId&gt;</span>oraclejdbc<span class="nt">&lt;/artifactId&gt;</span>
+                <span class="nt">&lt;packaging&gt;</span>jar<span class="nt">&lt;/packaging&gt;</span>
+                <span class="nt">&lt;version&gt;</span>14<span class="nt">&lt;/version&gt;</span>
+            <span class="nt">&lt;/configuration&gt;</span>
+        <span class="nt">&lt;/execution&gt;</span>
+        <span class="nt">&lt;execution&gt;</span>
+            <span class="nt">&lt;id&gt;</span>install-artifacts.2<span class="nt">&lt;/id&gt;</span>
+            <span class="nt">&lt;goals&gt;</span>
+                <span class="nt">&lt;goal&gt;</span>install-file<span class="nt">&lt;/goal&gt;</span>
+            <span class="nt">&lt;/goals&gt;</span>
+            <span class="nt">&lt;phase&gt;</span>validate<span class="nt">&lt;/phase&gt;</span>
+            <span class="nt">&lt;configuration&gt;</span>
+                <span class="nt">&lt;file&gt;</span>${basedir}/libs/foundation-1.0.jar<span class="nt">&lt;/file&gt;</span>
+                <span class="nt">&lt;groupId&gt;</span>org.bg<span class="nt">&lt;/groupId&gt;</span>
+                <span class="nt">&lt;packaging&gt;</span>jar<span class="nt">&lt;/packaging&gt;</span>
+                <span class="nt">&lt;artifactId&gt;</span>foundation<span class="nt">&lt;/artifactId&gt;</span>
+                <span class="nt">&lt;version&gt;</span>1.0<span class="nt">&lt;/version&gt;</span>
+            <span class="nt">&lt;/configuration&gt;</span>
+        <span class="nt">&lt;/execution&gt;</span>
+    <span class="nt">&lt;/executions&gt;</span>
+<span class="nt">&lt;/plugin&gt;</span>
+</code></pre></div>
+<p>单个也可以配置成：</p>
+<div class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;plugin&gt;</span>
+   <span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
+   <span class="nt">&lt;artifactId&gt;</span>maven-install-plugin<span class="nt">&lt;/artifactId&gt;</span>
+   <span class="nt">&lt;version&gt;</span>2.4<span class="nt">&lt;/version&gt;</span>
+   <span class="nt">&lt;configuration&gt;</span>
+      <span class="nt">&lt;groupId&gt;</span>org.oracle<span class="nt">&lt;/groupId&gt;</span>
+      <span class="nt">&lt;artifactId&gt;</span>oraclejdbc<span class="nt">&lt;/artifactId&gt;</span>
+      <span class="nt">&lt;version&gt;</span>14<span class="nt">&lt;/version&gt;</span>
+      <span class="nt">&lt;packaging&gt;</span>jar<span class="nt">&lt;/packaging&gt;</span>
+      <span class="nt">&lt;file&gt;</span>${basedir}/libs/ojdbc14.jar<span class="nt">&lt;/file&gt;</span>
+   <span class="nt">&lt;/configuration&gt;</span>
+   <span class="nt">&lt;executions&gt;</span>
+      <span class="nt">&lt;execution&gt;</span>
+         <span class="nt">&lt;id&gt;</span>install-jar-lib<span class="nt">&lt;/id&gt;</span>
+         <span class="nt">&lt;goals&gt;</span>
+            <span class="nt">&lt;goal&gt;</span>install-file<span class="nt">&lt;/goal&gt;</span>
+         <span class="nt">&lt;/goals&gt;</span>
+         <span class="nt">&lt;phase&gt;</span>validate<span class="nt">&lt;/phase&gt;</span>
+      <span class="nt">&lt;/execution&gt;</span>
+   <span class="nt">&lt;/executions&gt;</span>
+<span class="nt">&lt;/plugin&gt;</span>
+</code></pre></div>
+<h2>执行导入</h2>
+
+<ol>
+<li>在经过Maven的validate阶段时自动导入安装，在executions里指定插件的goals和maven的phase。</li>
+<li>直接执行命令 <code>mvn install:install-file</code></li>
+</ol>
+
+<h2>插件属性</h2>
+
+<p>如果要在导入时生成pom文件，增加配置属性：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">&lt;generatePom&gt;true&lt;/generatePom&gt;
+</code></pre></div>
+<p>指定自己的POM文件：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">&lt;generatePom&gt;false&lt;/generatePom&gt;
+&lt;pomFile&gt;${basedir}/dependencies/someartifact-1.0.pom&lt;/pomFile&gt;
+</code></pre></div>
+<p>如果JAR自带POM文件无需指定此属性，会自动安装。</p>
+
+<p>更多详细配置：<a href="http://maven.apache.org/plugins/maven-install-plugin/install-file-mojo.html">http://maven.apache.org/plugins/maven-install-plugin/install-file-mojo.html</a></p>
+
+<p>最后提示一句，其实Maven生命周期中的每一个阶段都是一个插件来实现的，而且都可以单独拿出来根据你的使用需要来配置。<br>
+详细请查看<a href="http://maven.apache.org/plugins/">http://maven.apache.org/plugins/</a><br>
+或者<br>
+另一篇Maven相关文章<a href="http://www.cnblogs.com/xguo/archive/2013/06/01/3113146.html">http://www.cnblogs.com/xguo/archive/2013/06/01/3113146.html</a>。</p>
+
+  </div>
+
+  
+  <div id="page_nav">
+    <div class="split">
+    <i>上一篇 / 下一篇</i>
+    <hr/>
+    </div>
+    <div>
+      
+      <li><a href='/sublimetext/'>可以考虑使用SublimeText编辑器替代notepad++了</a></li>
+      
+    </div>
+    <div>
+      
+      <li><a href='/maven/'>Maven使用笔记</a></li>
+      
+    </div>
+  </div>
+  
+
+  <div class="relatedposts">
+    <div class="split">
+    <i>相关内容</i>
+    <hr/>
+    </div>
+    <!--使用tag做为相关阅读，，也可以使用 category-->
+    
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="/github-pages-blog/">再次用Github-Pages建立自己的独立博客</a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="/go-lang-install/">GO语言的安装和简单的使用体验</a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="/maven/">Maven使用笔记</a></li>
+    
+    
+  </div>
+
+  <div class="copyright" style="text-align: right;padding-top: 20px">
+      本文永久链接地址：<a title="Maven安装jar包到本地仓库" href="http://aliencode.me/maven-install-jar-local/">http://aliencode.me/maven-install-jar-local/</a>, 转载请注明来源！<br />
+  </div>
+
+  <div class="date" style="text-align: right;color: #ccc">
+    Written on 2013, 06, 10
+  </div>
+
+  
+
+  
+
+
+
+</article>
+
+
+</div>
+
+</body>

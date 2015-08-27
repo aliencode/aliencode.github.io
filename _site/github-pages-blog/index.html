@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="aliencode.me">
+    <meta name="keywords" content="aliencode.me">
+    <meta name="author" content="aliencode">
+    <link href="/feed.xml" type="application/rss+xml"  />
+    <title>aliencode.me</title>
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+</head>
+<body>
+
+<div class="header">
+    <a href="/"><img class="logo" src="/images/me.png"></a>
+    <div></div>
+    <div class="logo-title">aliencode</div>
+    <div class="sub-title">一个安静的地方和一些过往的东西</div>
+
+    <ul class="mainmenu">
+        <!--<li><a href="/">首页</a></li>-->
+        <li><a href="/list.html">列表</a></li>
+        <li><a href="/categories.html">分类</a></li>
+        <li><a href="/tags.html">标签</a></li>
+        <li><a href="/archive.html">归档</a></li>
+        <li><a href="/feed.xml" target="_blank">RSS</a></li>
+    </ul>
+    <div class="footer">
+        &copy; aliencode.me All Rights Reserved. <br/>
+        themed by <a href="http://aliencode.me">Jekyll-Strip</a>
+    </div>
+</div>
+<div class="wrapper">
+    <article class="post">
+  <h1>再次用Github-Pages建立自己的独立博客</h1>
+  <div class="meta">
+    
+        <span class="categories">
+          <span class="icon-bookmark" title="Categories"></span>
+          
+          <a href="/categories.html#笔记" title="笔记">笔记</a>
+          
+        </span>
+    
+    &nbsp;&nbsp;
+    
+        <span class="tags">
+          <span class="icon-tags" title="Tags"></span>
+          
+          <a href="/tags.html#github-pages" title="github-pages">#github-pages</a>&nbsp;
+          
+          <a href="/tags.html#jekyll" title="jekyll">#jekyll</a>&nbsp;
+          
+          <a href="/tags.html#Markdown" title="Markdown">#Markdown</a>&nbsp;
+          
+        </span>
+    
+  </div>
+  <div class="entry">
+    <p>作为一个老程序猿随着年龄的增长这些年对技术的嗅觉越发敏感了，看见个陌生的东西就想研究一下 <img class='emoji' title=':-1:' alt=':-1:' src='https://assets.github.com/images/icons/emoji/unicode/1f44e.png' height='20' width='20' align='absmiddle' /> 。
+早在几年前折腾过Jekyll，当时的Jekyll还不成熟，用中文写的东西会出现乱码、分页困难、文章摘要获取等问题，记得当时鼓捣了半天还是不太好用后就放弃了。</p>
+
+<!-- more -->
+
+<p>后来经常会在Github中开源项目上的pages看到它做项目介绍，也看到有越来越多的人们用它做自己的个人博客或者产品主页，大多数的人是些技术Geek。
+加上这两年Markdown的流行对类似的工具更是起到强大的推动作用，诞生了各种类似的产品，如 <a href="http://FarBox.com">FarBox.com</a>, <a href="https://ghost.org/">Ghost</a> ，<a href="https://hexo.io/zh-cn/">Hexo</a> 等。</p>
+
+<p>一时间各大博客网站开始支持Markdown的写作格式，很多开源的博客系统和一些技术类的开源软件也都支持Markdown格式的编辑器，尤其在Github上被广泛使用！</p>
+
+<p>心里的草又长出来了，决定找机会去看看，加上自己平时也都是用Markdown写东西，正好可以利用上，以后写的东西就可以直接用它发布了，一举两得，真是个好东西 <img class='emoji' title=':smile:' alt=':smile:' src='https://assets.github.com/images/icons/emoji/unicode/1f604.png' height='20' width='20' align='absmiddle' /> 。</p>
+
+<h2>Github-Pages</h2>
+
+<p>每个账号可以在github上创建一个自己的pages主站而且只能有一个，地址是 <em>username.github.io</em>，如 <em>aliencode.github.io</em>，
+步骤是点击 <kbd>New repository</kbd> Repository name 填写 <em>username.github.io</em> 注意 <strong>username</strong> 是你的用户名。</p>
+
+<h2>关于Jekyll</h2>
+
+<p>这里来简单的说明几个问题，jekyll可以是一个静态网站生成工具，就是说它可以把你写的纯文本文档套上你的模板生成一个具体的网站，然后把生成的静态文件部署到任何服务器（注意不是github）上而不需要数据库和其它运行环境
+即可跑的很欢快。</p>
+
+<p>然而github-pages本身就是一个jekyll的解析器，你只要把<code>jekyll new myblog</code>命令生成的<code>myblog</code>博客目录完整的上传到github-pages上就完成了所有的工作，
+之后在<code>_posts</code>目录里写你的博文就可以了。</p>
+
+<p>你甚至不需要安装jekyll，你直接下载<a href="https://github.com/barryclark/jekyll-now">jekyll-now</a>这个项目，然后做一些个性化的修改提交到你的github-pages，
+之后就是往<code>_posts</code>目录里添加博文就会自动发布了。</p>
+
+<h2>安装Jekyll</h2>
+
+<p>如果你需要在本地调试，否则你不需要安装。</p>
+
+<p>我是在MAC上安装的，操作系统是OS X 10.10，由于本身是gem的方式安装，所以安装过程非常简单，直接执行命令：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">sudo gem install github-pages
+</code></pre></div>
+<p>来安装，
+为什么不是<code>jekyll</code>而是<code>github-pages</code>呢，简单的说<code>github-pages</code>是<code>jekyll</code>的一个封装，带了很多插件，可以通过命令<code>github-pages versions</code>来查看有哪些插件和具体版本号。</p>
+
+<p>如果是windows的话本身是没有ruby的环境，所以需要自行安装，这里提供一个快速安装Ruby的工具，<a href="http://rubyinstaller.org/downloads/">rubyinstaller</a>，安装完之后就可以运行上面的命令了。</p>
+
+<h2>Jekyll模板</h2>
+
+<p>Jekyll的模板有很多，如： <a href="http://jekyllthemes.org/">jekyllthemes</a>，如果你不想和其它人的看起来很像就自己动手做一个，或者修改也可以。<br>
+<code>_layouts</code> 是模板目录，模板也可以包含其它文件  <code>{% include meta.html %}</code>  ，被包含的文件放在 <code>_includes</code> 目录下。<br>
+ <code>_sass</code> 样式文件目录，根目录里 <code>style.scss</code> 用 <code>@import &quot;highlights&quot;;</code> 引用的文件放在这个目录里，这是 <a href="http://sass-lang.com/">Sass</a> 语法。</p>
+
+<h2>绑定域名</h2>
+
+<p>第一步，注册一个域名，如aliencode.me，然后解析到你的github-pages如图：</p>
+
+<p><img src="/images/2015/domain.png" alt="域名绑定"></p>
+
+<p>第二步，在博客根目录添加一个名为 <code>CNAME</code> 的文件，内容是你的域名，如aliencode.me</p>
+
+<h2>资料</h2>
+
+<ul>
+<li><a href="https://pages.github.com/">pages.github.com，github-pages官方说明</a></li>
+<li><a href="http://jekyllrb.com/docs/home/">Jekyll 官方相关说明文档</a></li>
+<li><a href="https://github.com/Shopify/liquid/wiki/Liquid-for-Designers">Liquid Jekyll 使用的模板语言</a></li>
+<li><a href="https://help.github.com/articles/markdown-basics/">Github Markdown 语法参考</a></li>
+<li><a href="http://kramdown.gettalong.org/syntax.html">Kramdown Markdown增加型语法参考</a></li>
+<li><a href="http://www.emoji-cheat-sheet.com/">Emoji 表情速查</a>, 需要开启 <a href="https://github.com/jekyll/jemoji">jemoji</a> 表情插件</li>
+<li><a href="https://github.com/barryclark/jekyll-now">jekyll-now 快速建站基础项目</a></li>
+<li><a href="https://github.com/github/pages-gem">Github-Pages的Jekyll本地开发环境</a></li>
+<li><a href="http://rubyinstaller.org/downloads/">Ruby Windows下安装包</a></li>
+</ul>
+
+  </div>
+
+  
+  <div id="page_nav">
+    <div class="split">
+    <i>上一篇 / 下一篇</i>
+    <hr/>
+    </div>
+    <div>
+      
+    </div>
+    <div>
+      
+      <li><a href='/go-lang-install/'>GO语言的安装和简单的使用体验</a></li>
+      
+    </div>
+  </div>
+  
+
+  <div class="relatedposts">
+    <div class="split">
+    <i>相关内容</i>
+    <hr/>
+    </div>
+    <!--使用tag做为相关阅读，，也可以使用 category-->
+    
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="/go-lang-install/">GO语言的安装和简单的使用体验</a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="/maven-install-jar-local/">Maven安装jar包到本地仓库</a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="/maven/">Maven使用笔记</a></li>
+    
+    
+  </div>
+
+  <div class="copyright" style="text-align: right;padding-top: 20px">
+      本文永久链接地址：<a title="再次用Github-Pages建立自己的独立博客" href="http://aliencode.me/github-pages-blog/">http://aliencode.me/github-pages-blog/</a>, 转载请注明来源！<br />
+  </div>
+
+  <div class="date" style="text-align: right;color: #ccc">
+    Written on 2015, 08, 21
+  </div>
+
+  
+
+  
+  <!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="2015082101" data-title="再次用Github-Pages建立自己的独立博客" data-url="/github-pages-blog/"></div>
+  <!-- 多说评论框 end -->
+  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"xguo"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+  <!-- 多说公共JS代码 end -->
+  
+
+
+
+</article>
+
+
+</div>
+
+</body>

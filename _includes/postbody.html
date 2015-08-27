@@ -1,0 +1,96 @@
+<article class="post">
+  <h1>{{ page.title }}</h1>
+  <div class="meta">
+    {% if page.categories %}
+        <span class="categories">
+          <span class="icon-bookmark" title="Categories"></span>
+          {% for category in page.categories %}
+          <a href="/categories.html#{{ category }}" title="{{ category }}">{{ category }}</a>
+          {% endfor %}
+        </span>
+    {% endif %}
+    &nbsp;&nbsp;
+    {% if page.tags %}
+        <span class="tags">
+          <span class="icon-tags" title="Tags"></span>
+          {% for tag in page.tags %}
+          <a href="/tags.html#{{ tag }}" title="{{ tag }}">#{{ tag }}</a>&nbsp;
+          {% endfor %}
+        </span>
+    {% endif %}
+  </div>
+  <div class="entry">
+    {{ content }}
+  </div>
+
+  {% if page.previous or page.next %}
+  <div id="page_nav">
+    <div class="split">
+    <i>上一篇 / 下一篇</i>
+    <hr/>
+    </div>
+    <div>
+      {% if page.next %}
+      <li><a href='{{page.next.url}}'>{{page.next.title}}</a></li>
+      {% endif %}
+    </div>
+    <div>
+      {% if page.previous %}
+      <li><a href='{{page.previous.url}}'>{{page.previous.title}}</a></li>
+      {% endif %}
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="relatedposts">
+    <div class="split">
+    <i>相关内容</i>
+    <hr/>
+    </div>
+    <!--使用tag做为相关阅读，，也可以使用 category-->
+    {% for post in site.related_posts limit:5 %}
+    {% assign match = false %}
+    {% for category in post.categories %}
+    {% if page.categories contains category %}
+    {% assign match = true %}
+    {% endif %}
+    {% endfor %}
+    {% if match %}
+    <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+    {% endif %}
+    {% endfor %}
+  </div>
+
+  <div class="copyright" style="text-align: right;padding-top: 20px">
+      本文永久链接地址：<a title="{{page.title}}" href="{{site.url}}{{page.url}}">{{site.url}}{{page.url}}</a>, 转载请注明来源！<br />
+  </div>
+
+  <div class="date" style="text-align: right;color: #ccc">
+    Written on {{ page.date | date: "%Y, %m, %d" }}
+  </div>
+
+  {% include disqus.html %}
+
+  {% if page.comments %}
+  <!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="{{page.pid}}" data-title="{{ page.title }}" data-url="{{page.url}}"></div>
+  <!-- 多说评论框 end -->
+  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"xguo"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+  <!-- 多说公共JS代码 end -->
+  {% endif %}
+
+
+
+</article>
+

@@ -1,0 +1,31 @@
+---
+layout: default
+---
+
+<div class="posts">
+    {% for post in paginator.posts //paginator只能在index.html中使用 %}
+    <li class="posts-item">
+        <span class="datetime">{{ post.date | date: "%Y - %m - %d" }}</span>
+        <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+        <div class="desc">
+            {% if post.more %}
+            {{ post.content | split: '<!-- more -->' | first }}
+            {% else %}
+            {{ post.excerpt }}
+            {% endif %}
+        </div>
+    </li>
+    {% endfor %}
+</div>
+
+{% if paginator.total_pages > 1 %}
+<div id="pagination">
+    <div class="paginator-list">
+        {% for page in (1..paginator.total_pages) %}
+        <a class="num{% if page == paginator.page %} current{% endif %}" href="/{%if page > 1 %}page{{ page }}/{% endif %}">{{ page }}</a>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+

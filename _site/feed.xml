@@ -1,0 +1,893 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>aliencode</title>
+    <description>aliencode.me</description>
+    <link>http://aliencode.me</link>
+    <atom:link href="http://aliencode.me/feed.xml" rel="self" type="application/rss+xml" />
+    
+      <item>
+        <title>再次用Github-Pages建立自己的独立博客</title>
+        <description>&lt;p&gt;作为一个老程序猿随着年龄的增长这些年对技术的嗅觉越发敏感了，看见个陌生的东西就想研究一下 &lt;img class=&#39;emoji&#39; title=&#39;:-1:&#39; alt=&#39;:-1:&#39; src=&#39;https://assets.github.com/images/icons/emoji/unicode/1f44e.png&#39; height=&#39;20&#39; width=&#39;20&#39; align=&#39;absmiddle&#39; /&gt; 。
+早在几年前折腾过Jekyll，当时的Jekyll还不成熟，用中文写的东西会出现乱码、分页困难、文章摘要获取等问题，记得当时鼓捣了半天还是不太好用后就放弃了。&lt;/p&gt;
+
+&lt;!-- more --&gt;
+
+&lt;p&gt;后来经常会在Github中开源项目上的pages看到它做项目介绍，也看到有越来越多的人们用它做自己的个人博客或者产品主页，大多数的人是些技术Geek。
+加上这两年Markdown的流行对类似的工具更是起到强大的推动作用，诞生了各种类似的产品，如 &lt;a href=&quot;http://FarBox.com&quot;&gt;FarBox.com&lt;/a&gt;, &lt;a href=&quot;https://ghost.org/&quot;&gt;Ghost&lt;/a&gt; ，&lt;a href=&quot;https://hexo.io/zh-cn/&quot;&gt;Hexo&lt;/a&gt; 等。&lt;/p&gt;
+
+&lt;p&gt;一时间各大博客网站开始支持Markdown的写作格式，很多开源的博客系统和一些技术类的开源软件也都支持Markdown格式的编辑器，尤其在Github上被广泛使用！&lt;/p&gt;
+
+&lt;p&gt;心里的草又长出来了，决定找机会去看看，加上自己平时也都是用Markdown写东西，正好可以利用上，以后写的东西就可以直接用它发布了，一举两得，真是个好东西 &lt;img class=&#39;emoji&#39; title=&#39;:smile:&#39; alt=&#39;:smile:&#39; src=&#39;https://assets.github.com/images/icons/emoji/unicode/1f604.png&#39; height=&#39;20&#39; width=&#39;20&#39; align=&#39;absmiddle&#39; /&gt; 。&lt;/p&gt;
+
+&lt;h2&gt;Github-Pages&lt;/h2&gt;
+
+&lt;p&gt;每个账号可以在github上创建一个自己的pages主站而且只能有一个，地址是 &lt;em&gt;username.github.io&lt;/em&gt;，如 &lt;em&gt;aliencode.github.io&lt;/em&gt;，
+步骤是点击 &lt;kbd&gt;New repository&lt;/kbd&gt; Repository name 填写 &lt;em&gt;username.github.io&lt;/em&gt; 注意 &lt;strong&gt;username&lt;/strong&gt; 是你的用户名。&lt;/p&gt;
+
+&lt;h2&gt;关于Jekyll&lt;/h2&gt;
+
+&lt;p&gt;这里来简单的说明几个问题，jekyll可以是一个静态网站生成工具，就是说它可以把你写的纯文本文档套上你的模板生成一个具体的网站，然后把生成的静态文件部署到任何服务器（注意不是github）上而不需要数据库和其它运行环境
+即可跑的很欢快。&lt;/p&gt;
+
+&lt;p&gt;然而github-pages本身就是一个jekyll的解析器，你只要把&lt;code&gt;jekyll new myblog&lt;/code&gt;命令生成的&lt;code&gt;myblog&lt;/code&gt;博客目录完整的上传到github-pages上就完成了所有的工作，
+之后在&lt;code&gt;_posts&lt;/code&gt;目录里写你的博文就可以了。&lt;/p&gt;
+
+&lt;p&gt;你甚至不需要安装jekyll，你直接下载&lt;a href=&quot;https://github.com/barryclark/jekyll-now&quot;&gt;jekyll-now&lt;/a&gt;这个项目，然后做一些个性化的修改提交到你的github-pages，
+之后就是往&lt;code&gt;_posts&lt;/code&gt;目录里添加博文就会自动发布了。&lt;/p&gt;
+
+&lt;h2&gt;安装Jekyll&lt;/h2&gt;
+
+&lt;p&gt;如果你需要在本地调试，否则你不需要安装。&lt;/p&gt;
+
+&lt;p&gt;我是在MAC上安装的，操作系统是OS X 10.10，由于本身是gem的方式安装，所以安装过程非常简单，直接执行命令：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;sudo gem install github-pages
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;来安装，
+为什么不是&lt;code&gt;jekyll&lt;/code&gt;而是&lt;code&gt;github-pages&lt;/code&gt;呢，简单的说&lt;code&gt;github-pages&lt;/code&gt;是&lt;code&gt;jekyll&lt;/code&gt;的一个封装，带了很多插件，可以通过命令&lt;code&gt;github-pages versions&lt;/code&gt;来查看有哪些插件和具体版本号。&lt;/p&gt;
+
+&lt;p&gt;如果是windows的话本身是没有ruby的环境，所以需要自行安装，这里提供一个快速安装Ruby的工具，&lt;a href=&quot;http://rubyinstaller.org/downloads/&quot;&gt;rubyinstaller&lt;/a&gt;，安装完之后就可以运行上面的命令了。&lt;/p&gt;
+
+&lt;h2&gt;Jekyll模板&lt;/h2&gt;
+
+&lt;p&gt;Jekyll的模板有很多，如： &lt;a href=&quot;http://jekyllthemes.org/&quot;&gt;jekyllthemes&lt;/a&gt;，如果你不想和其它人的看起来很像就自己动手做一个，或者修改也可以。&lt;br&gt;
+&lt;code&gt;_layouts&lt;/code&gt; 是模板目录，模板也可以包含其它文件  &lt;code&gt;{% include meta.html %}&lt;/code&gt;  ，被包含的文件放在 &lt;code&gt;_includes&lt;/code&gt; 目录下。&lt;br&gt;
+ &lt;code&gt;_sass&lt;/code&gt; 样式文件目录，根目录里 &lt;code&gt;style.scss&lt;/code&gt; 用 &lt;code&gt;@import &amp;quot;highlights&amp;quot;;&lt;/code&gt; 引用的文件放在这个目录里，这是 &lt;a href=&quot;http://sass-lang.com/&quot;&gt;Sass&lt;/a&gt; 语法。&lt;/p&gt;
+
+&lt;h2&gt;绑定域名&lt;/h2&gt;
+
+&lt;p&gt;第一步，注册一个域名，如aliencode.me，然后解析到你的github-pages如图：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2015/domain.png&quot; alt=&quot;域名绑定&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;第二步，在博客根目录添加一个名为 &lt;code&gt;CNAME&lt;/code&gt; 的文件，内容是你的域名，如aliencode.me&lt;/p&gt;
+
+&lt;h2&gt;资料&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://pages.github.com/&quot;&gt;pages.github.com，github-pages官方说明&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://jekyllrb.com/docs/home/&quot;&gt;Jekyll 官方相关说明文档&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/Shopify/liquid/wiki/Liquid-for-Designers&quot;&gt;Liquid Jekyll 使用的模板语言&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://help.github.com/articles/markdown-basics/&quot;&gt;Github Markdown 语法参考&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://kramdown.gettalong.org/syntax.html&quot;&gt;Kramdown Markdown增加型语法参考&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.emoji-cheat-sheet.com/&quot;&gt;Emoji 表情速查&lt;/a&gt;, 需要开启 &lt;a href=&quot;https://github.com/jekyll/jemoji&quot;&gt;jemoji&lt;/a&gt; 表情插件&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/barryclark/jekyll-now&quot;&gt;jekyll-now 快速建站基础项目&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/github/pages-gem&quot;&gt;Github-Pages的Jekyll本地开发环境&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://rubyinstaller.org/downloads/&quot;&gt;Ruby Windows下安装包&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Fri, 21 Aug 2015 00:00:00 +0800</pubDate>
+        <link>http://aliencode.me/github-pages-blog/</link>
+        <guid isPermaLink="true">http://aliencode.me/github-pages-blog/</guid>
+      </item>
+    
+      <item>
+        <title>GO语言的安装和简单的使用体验</title>
+        <description>&lt;p&gt;Go是google开发的一门比较新的语言。最近接触了docker后，发现很多周边项目都是用go来编写的，就找时间体验了一下，由于没有深入学习，还没有太多体会。
+文本简单的使用go语言的web框架martini体验了一把用go开发web应用的方法，martini框架可以非常方便的实现目前比较流行了RESTFul协议的web服务。&lt;/p&gt;
+
+&lt;p&gt;官方下载主页： &lt;a href=&quot;https://golang.org/dl/&quot;&gt;https://golang.org/dl/&lt;/a&gt; ，包括所有版本的下载链接，我们通常会选择windows版本的下载。&lt;/p&gt;
+
+&lt;p&gt;关于windows版本的GO提供了安装包和zip两种方式。比较喜欢zip的方式，绿色环保，&lt;br&gt;
+比如： &lt;code&gt;go1.3.3.windows-amd64.zip&lt;/code&gt;&lt;br&gt;
+然后就是下载解压到指定目录，下载过程由于伟大的墙的干扰存在，可能会很漫长或者根本打不开 &lt;img class=&#39;emoji&#39; title=&#39;:sweat_smile:&#39; alt=&#39;:sweat_smile:&#39; src=&#39;https://assets.github.com/images/icons/emoji/unicode/1f605.png&#39; height=&#39;20&#39; width=&#39;20&#39; align=&#39;absmiddle&#39; /&gt; ，就请到  &lt;a href=&quot;http://golangtc.com/download&quot;&gt;http://golangtc.com/download&lt;/a&gt;  这个网站下载，是国内一个相当于代理吧。&lt;/p&gt;
+
+&lt;h3&gt;配置环境变量&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;环境变量的配置跟JAVA类似，&lt;code&gt;GOROOT&lt;/code&gt;  对应JAVA的就是 &lt;code&gt;JAVA_HOME&lt;/code&gt;。 所以添加环境变量 &lt;code&gt;GOROOT&lt;/code&gt;  值为你解压后的 GO 的根目录，注意不是bin目录。&lt;/li&gt;
+&lt;li&gt;设置PATH环境变量，让终端或CMD窗口可识别GO命令，把GO解压后的bin路径添加到path环境变量。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;GOPATH&lt;/code&gt; 这个环境变量可能理解为GO的工作空间，用来存放项目源文件，第三方依赖和编译后的 &lt;code&gt;.a&lt;/code&gt;  文件。简单的说就是你以后开发项目存放的根目录，后面还会说明一下 &lt;code&gt;GOPATH&lt;/code&gt;  这个东西怎么用比较好。目前就随便指定一个目录给 &lt;code&gt;GOPATH&lt;/code&gt;  环境变量，或者不指定也可以，就直接跟随每个项目走，放在项目的目录里。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;建项目&lt;/h2&gt;
+
+&lt;p&gt;需要一个特定的编辑器liteide，经过实践也最好用这个编辑器，支持中文，虽然还不好用但已经没有更好的了，不知道IDEA什么时候会支持GO，只有等等看了。&lt;br&gt;
+下载liteide， &lt;a href=&quot;http://sourceforge.net/projects/liteide/files/&quot;&gt;http://sourceforge.net/projects/liteide/files/&lt;/a&gt;&lt;br&gt;
+github地址： &lt;a href=&quot;https://github.com/visualfc/liteide&quot;&gt;https://github.com/visualfc/liteide&lt;/a&gt;&lt;br&gt;
+下载就一个zip包，解压后运行那个exe就启动了liteide编辑器，真心喜欢这种zip的提供方式啊 &lt;img class=&#39;emoji&#39; title=&#39;:smile:&#39; alt=&#39;:smile:&#39; src=&#39;https://assets.github.com/images/icons/emoji/unicode/1f604.png&#39; height=&#39;20&#39; width=&#39;20&#39; align=&#39;absmiddle&#39; /&gt; ！&lt;/p&gt;
+
+&lt;p&gt;新建一个项目的根目录，如： &lt;code&gt;D:\DEV\test\gotest\&lt;/code&gt; ，gotest就是项目的根目录，用liteide打开这个目录，然后按下面步骤进行：&lt;/p&gt;
+
+&lt;h3&gt;第一步，设置项目环境变量&lt;/h3&gt;
+
+&lt;p&gt;为了不把所有的项目放在一起，所以为每个项目设定一下环境变量，主要是 &lt;code&gt;GOPATH&lt;/code&gt;.。&lt;br&gt;
+&lt;kbd&gt;[查看]&lt;/kbd&gt; -&amp;gt; &lt;kbd&gt;[编辑环境变量]&lt;/kbd&gt; ，打开一个窗口，在这里可以设置一下你项目的环境变量，大致内容如下：&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; # native compiler windows amd64
+&lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt; GOROOT=D:\SOFT\go1.3.windows-amd64\go
+&lt;span class=&quot;lineno&quot;&gt; 3&lt;/span&gt; GOPATH=D:\DEV\test\gotest\
+&lt;span class=&quot;lineno&quot;&gt; 4&lt;/span&gt; #GOBIN=
+&lt;span class=&quot;lineno&quot;&gt; 5&lt;/span&gt; GOARCH=amd64
+&lt;span class=&quot;lineno&quot;&gt; 6&lt;/span&gt; GOOS=windows
+&lt;span class=&quot;lineno&quot;&gt; 7&lt;/span&gt; CGO_ENABLED=1
+&lt;span class=&quot;lineno&quot;&gt; 8&lt;/span&gt; #
+&lt;span class=&quot;lineno&quot;&gt; 9&lt;/span&gt; PATH=c:\mingw64\bin;%GOROOT%\bin;%PATH%
+&lt;span class=&quot;lineno&quot;&gt;10&lt;/span&gt; #
+&lt;span class=&quot;lineno&quot;&gt;11&lt;/span&gt; LITEIDE_GDB=gdb64
+&lt;span class=&quot;lineno&quot;&gt;12&lt;/span&gt; LITEIDE_MAKE=mingw32-make
+&lt;span class=&quot;lineno&quot;&gt;13&lt;/span&gt; LITEIDE_TERM=%COMSPEC%
+&lt;span class=&quot;lineno&quot;&gt;14&lt;/span&gt; LITEIDE_TERMARGS=
+&lt;span class=&quot;lineno&quot;&gt;15&lt;/span&gt; LITEIDE_EXEC=%COMSPEC%
+&lt;span class=&quot;lineno&quot;&gt;16&lt;/span&gt; LITEIDE_EXECOPT=/C&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;以上代码第2行：&lt;/strong&gt;  GOROOT指定到你GO安装目录&lt;br&gt;
+&lt;strong&gt;以上代码第3行：&lt;/strong&gt;  GOPATH指定到你项目的根目录，本例是 &lt;code&gt;D:\DEV\test\gotest\&lt;/code&gt; ，在这里指定是为了把项目所有依赖的第三方包让go放在我们的项目目录里。&lt;/p&gt;
+
+&lt;p&gt;GOPATH 可以简单的理解为项目的根目录，下面有  &lt;code&gt;src&lt;/code&gt;  、 &lt;code&gt;pkg&lt;/code&gt; 、 &lt;code&gt;bin&lt;/code&gt;  三个目录，src需要自己创建，pkg和bin会在编译时创建，pkg存放编译后的文件，bin存放可执行文件。这个GOPATH感觉设计的很傻很多余，其实GO可以参考NODE的NPM实现方式，只是取消那个配置文件，固定目录结构就是最好的方式。&lt;/p&gt;
+
+&lt;h3&gt;第二步，项目目录构建&lt;/h3&gt;
+
+&lt;p&gt;创建项目源码结构，思路跟java差不多，你在项目根目录也就是gotest目录下建一个 &lt;code&gt;src&lt;/code&gt;  名字的目录，这是固定的名字，go认为这里你代码的根目录，src下面就是你的go源码和第三方类库的源码，go的类库通常以源码的方式提供，再也不用找不到源码而去反编译class文件了 :):，在项目编译运行时统一编译到pkg下。src目录下可以是包或者直接就是go文件，如 &lt;code&gt;src/config/config.go&lt;/code&gt;  或者 &lt;code&gt;src/gotest/main.go&lt;/code&gt; ， config 和 gotest 在这里就是你的包名。&lt;/p&gt;
+
+&lt;p&gt;最终目录如图：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2015/go.png&quot; alt=&quot;go项目目录结构&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;其中 &lt;code&gt;src/gotest/public&lt;/code&gt;  相当是 java里的webapp目录，存放静态文件根目录。通过 &lt;code&gt;m.Use(martini.Static(&amp;quot;assets&amp;quot;))&lt;/code&gt; 添加其它静态目录。&lt;/p&gt;
+
+&lt;h3&gt;第二步，示例代码&lt;/h3&gt;
+
+&lt;h4&gt;config.go&lt;/h4&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-go&quot; data-lang=&quot;go&quot;&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;LoadConfig&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;GO的包路径，跟java类似，只是它用 &lt;code&gt;/&lt;/code&gt; 代替 &lt;code&gt;.&lt;/code&gt; ，在java里的包路径  &lt;code&gt;com.xxx.config&lt;/code&gt;，go是 &lt;code&gt;com/xxx/config&lt;/code&gt;&lt;/p&gt;
+
+&lt;h4&gt;main.go&lt;/h4&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-go&quot; data-lang=&quot;go&quot;&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;main&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//入口包名，固定的，就是说你的项目必须有一个main包&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// 引入其它包，可以下拉网络项目，这个很厉害&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;&amp;quot;config&amp;quot;&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;&amp;quot;github.com/go-martini/martini&amp;quot;&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;&amp;quot;github.com/martini-contrib/render&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// main函数，跟java类似，必须的&lt;/span&gt;
+
+    &lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;LoadConfig&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// 其它函数的调用方法&lt;/span&gt;
+
+    &lt;span class=&quot;nx&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;martini&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Classic&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// 初始化martini框架，注意它变量的赋值方式， `:=`&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Use&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;render&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Renderer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// martini框架插件启用方式&lt;/span&gt;
+
+    &lt;span class=&quot;nx&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;/&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// martini框架绑定请求的方式&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;Hello world!&amp;quot;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;// 数组赋值方式，`[...]` 表示不定长度，`string` 表示数据类型，貌似没办法存储多种类型的数据，`{&amp;quot;aa&amp;quot;, &amp;quot;bbb&amp;quot;}`  数组值。&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;aa&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;bbb&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;  
+
+  &lt;span class=&quot;c1&quot;&gt;// 使用插件 `martini-contrib/render` 输出json数据，更多用法： https://github.com/martini-contrib/render&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;/json&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;r&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;render&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Render&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;  
+        &lt;span class=&quot;nx&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;JSON&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+
+    &lt;span class=&quot;nx&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Run&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// 启动martini框架&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;编译运行项目&lt;/h3&gt;
+
+&lt;p&gt;首先要把第三方依赖给下载回来，这点GO做的非常好，它是通过分析你源码来得到你要用到哪些依赖库，它会从github等开源网站上下载。不需要像NPM或者MAVEN一样需要一个配置文件来指定依赖，不过问题来了，如何指定不同版本的引用呢？全是最新？  &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;下载依赖&lt;/strong&gt; ，打开一个GO文件，如 &lt;code&gt;main.go&lt;/code&gt; ，在工具栏会出行一行命令按钮，常用之一就是 &lt;code&gt;go get&lt;/code&gt; 命令，对应的工具栏按钮就是 &lt;kbd&gt;[GET]&lt;/kbd&gt; 图标，点击一直就会通过 &lt;code&gt;go get&lt;/code&gt; 命令下载你当前文件所依赖的第三方类库，呵呵 ，是不是比java方便啊！&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;运行项目&lt;/strong&gt; ， 下载完依赖就可以运行项目了，呵呵，就等这一刻。打开main.go，点击最常用的图标 &lt;kbd&gt;[BR]&lt;/kbd&gt; 如同 &lt;code&gt;go run&lt;/code&gt; 命令，然后不出意外的话就启动运行了。说真的启动一个web应用这速度是非常之快呀，比起tomcat等这个简直就是秒启，真正节约了我们开发时间 &lt;img class=&#39;emoji&#39; title=&#39;:+1:&#39; alt=&#39;:+1:&#39; src=&#39;https://assets.github.com/images/icons/emoji/unicode/1f44d.png&#39; height=&#39;20&#39; width=&#39;20&#39; align=&#39;absmiddle&#39; /&gt;&lt;/p&gt;
+
+&lt;h2&gt;GO不一样的地方&lt;/h2&gt;
+
+&lt;p&gt;与java相比的几个最明显的不同之处：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;不能有多余的变量，如果申明的变量没有被使用直接异常&lt;/li&gt;
+&lt;li&gt;不能有多余的引用，引入了没有乃至的类库也会异常&lt;/li&gt;
+&lt;li&gt;变量的申明是，名字在前，类型在后，如： &lt;code&gt;var str string&lt;/code&gt;，当然可以简单写成 &lt;code&gt;str := &amp;quot;a&amp;quot;&lt;/code&gt;，但有些时候是无法避免的如： &lt;code&gt;json := [...]string{&amp;quot;aa&amp;quot;, &amp;quot;bbb&amp;quot;}&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;结尾没有分号， &lt;code&gt;;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;多个变量一起申明： &lt;code&gt;a,b := 100,101&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;其它的就暂时没有深入研究了。&lt;/p&gt;
+
+&lt;p&gt;GO加上martini可以通过几行代码就能实现一个web应用，然后有一个json接口输出json数据，当然输出xml也非常简单，
+如 &lt;code&gt;r.XML(200, data)&lt;/code&gt; ，又或者渲染一个HTML模板 &lt;code&gt;r.HTML(200, &amp;quot;mytemplate&amp;quot;, data)&lt;/code&gt; 。
+真的是非常方便简单，给你的感觉就是这东西天生就是为web开发而生，一切都是那么的自然和美妙！
+当然这只是简单的使用，不知道业务变是非常复杂以后go还能不能如此简单的应对呢，期待大家的共同检验也期待go语言尽快成熟和热闹起来！&lt;/p&gt;
+
+&lt;h2&gt;参考&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;GO语言入门： &lt;a href=&quot;https://github.com/astaxie/build-web-application-with-golang/blob/master/ebook/preface.md&quot;&gt;https://github.com/astaxie/build-web-application-with-golang/blob/master/ebook/preface.md&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;GO WEB开发框架martini的中文入门： &lt;a href=&quot;https://github.com/go-martini/martini/blob/master/translations/README_zh_cn.md&quot;&gt;https://github.com/go-martini/martini/blob/master/translations/README_zh_cn.md&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;在线体验： &lt;a href=&quot;http://tour.golangtc.com/welcome/1&quot;&gt;http://tour.golangtc.com/welcome/1&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sat, 03 May 2014 00:00:00 +0800</pubDate>
+        <link>http://aliencode.me/go-lang-install/</link>
+        <guid isPermaLink="true">http://aliencode.me/go-lang-install/</guid>
+      </item>
+    
+      <item>
+        <title>可以考虑使用SublimeText编辑器替代notepad++了</title>
+        <description>&lt;p&gt;大概是去年吧，这款编辑器神一般的出现在我面前，经过我小心翼翼的试用后发现并不是那么太顺手，插件配置都不太成熟，如Package Control。
+最喜欢用它的zencoding还得专门开个小窗 &lt;img class=&#39;emoji&#39; title=&#39;:sweat:&#39; alt=&#39;:sweat:&#39; src=&#39;https://assets.github.com/images/icons/emoji/unicode/1f613.png&#39; height=&#39;20&#39; width=&#39;20&#39; align=&#39;absmiddle&#39; /&gt;，随后放弃。&lt;/p&gt;
+
+&lt;!-- more --&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2015/soda-2-light-theme.png&quot; alt=&quot;可以考虑使用SublimeText编辑器替代notepad++了&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;今年升级过MAC系统后始终找不到一款合适的家常编辑器，MAC上好用的多数又收费，
+而且不想在MAC上和WIN上用两款不同的编辑器，之前用的notepad++在MAC上又没有，后来想起了它，SublimeText，传送门：&lt;a href=&quot;http://www.sublimetext.com/3&quot;&gt;http://www.sublimetext.com/3&lt;/a&gt; ！&lt;/p&gt;
+
+&lt;p&gt;SublimeText发布了3.0公测版本，SublimeText本身没有什么问题，关键在于能不能配置出适合自己的风格和使用习惯还有功能，
+而且这些都不要太麻烦，否则我就要选择放弃了~！&lt;/p&gt;
+
+&lt;h2&gt;插件安装配置&lt;/h2&gt;
+
+&lt;p&gt;经过一翻配置基本达到理想状态也符合我使用习惯和必备功能，安装的插件有：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Package Control ： 这个不用说，用SublimeText的必装插件；&lt;/li&gt;
+&lt;li&gt;Theme Soda ： 不喜欢自带的样式？，那就用Soda吧，在社区里人气很旺，我很喜欢，感觉这个很美；&lt;/li&gt;
+&lt;li&gt;Emmet ： 这个用说吗，原名zen coding，可以理解为html、css等关键字或代码块的快捷键；&lt;/li&gt;
+&lt;li&gt;HTML-CSS-JS Prettify ： 这是代码格式化插件，基于nodejs。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;这些功能基本够我用了，再安装多担心兼容性和稳定性还有启动速度，所以其它的还是让其它软件去做吧，因为它们更专业，比如ftp，svn，markdown预览功能等。&lt;/p&gt;
+
+&lt;h3&gt;插件HTML-CSS-JS Prettify配置&lt;/h3&gt;
+
+&lt;p&gt;HTML-CSS-JS Prettify基于nodejs，传送门：&lt;a href=&quot;http://nodejs.org/download/&quot;&gt;http://nodejs.org/download/&lt;/a&gt;，最好下载zip或tar.gz包，直接解压就能用了。&lt;/p&gt;
+
+&lt;p&gt;配置方法, 下载nodejs解压后，
+在HTML-CSS-JS Prettify的配置文件（在SublimeText任意位置右键HTML-CSS-JS Prettify-&amp;gt;Set node path）中设置如：&lt;code&gt;&amp;quot;node_path&amp;quot;: &amp;quot;/Download/node-v0.10.21-darwin-x64/bin/node&amp;quot;&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3&gt;更多插件&lt;/h3&gt;
+
+&lt;p&gt;Package Control： &lt;a href=&quot;https://sublime.wbond.net/&quot;&gt;https://sublime.wbond.net/&lt;/a&gt;，现在成熟很多了，很有官方风格。&lt;/p&gt;
+</description>
+        <pubDate>Tue, 29 Oct 2013 00:00:00 +0800</pubDate>
+        <link>http://aliencode.me/sublimetext/</link>
+        <guid isPermaLink="true">http://aliencode.me/sublimetext/</guid>
+      </item>
+    
+      <item>
+        <title>Maven安装jar包到本地仓库</title>
+        <description>&lt;p&gt;在项目开发期间难免遇遭使用的jar包在Maven的中央仓库里没有，比如那个固执的Oracle，这家伙始终不愿意把ojdbc驱动提交到Maven仓库，这件事很郁闷，Maven又不支持引入本地jar文件如果用IDE强行引入在Maven编译的时候又无法通过。&lt;/p&gt;
+
+&lt;p&gt;Maven官方提供导入本地jar文件到本地仓库的&lt;a href=&quot;http://maven.apache.org/plugins/maven-install-plugin/&quot;&gt;maven-install-plugin&lt;/a&gt;，可是要用的时候又得苦逼的去找命令，用起来也比较麻烦，因此，本文详细介绍一下maven-install-plugin插件的使用，可以导入任意数量的jar文件到本地仓库，是不是很开心那！&lt;/p&gt;
+
+&lt;h2&gt;配置POM&lt;/h2&gt;
+
+&lt;p&gt;Maven插件&lt;a href=&quot;http://maven.apache.org/plugins/maven-install-plugin/&quot;&gt;maven-install-plugin&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;plugin&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;maven-install-plugin&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;2.4&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;inherited&amp;gt;&lt;/span&gt;false&lt;span class=&quot;nt&quot;&gt;&amp;lt;/inherited&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;executions&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;execution&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;id&amp;gt;&lt;/span&gt;install-artifacts.1&lt;span class=&quot;nt&quot;&gt;&amp;lt;/id&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;goals&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;goal&amp;gt;&lt;/span&gt;install-file&lt;span class=&quot;nt&quot;&gt;&amp;lt;/goal&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;/goals&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;phase&amp;gt;&lt;/span&gt;validate&lt;span class=&quot;nt&quot;&gt;&amp;lt;/phase&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;configuration&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;file&amp;gt;&lt;/span&gt;${basedir}/libs/ojdbc14.jar&lt;span class=&quot;nt&quot;&gt;&amp;lt;/file&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.oracle&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;oraclejdbc&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;packaging&amp;gt;&lt;/span&gt;jar&lt;span class=&quot;nt&quot;&gt;&amp;lt;/packaging&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;14&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;/configuration&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/execution&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;execution&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;id&amp;gt;&lt;/span&gt;install-artifacts.2&lt;span class=&quot;nt&quot;&gt;&amp;lt;/id&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;goals&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;goal&amp;gt;&lt;/span&gt;install-file&lt;span class=&quot;nt&quot;&gt;&amp;lt;/goal&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;/goals&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;phase&amp;gt;&lt;/span&gt;validate&lt;span class=&quot;nt&quot;&gt;&amp;lt;/phase&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;configuration&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;file&amp;gt;&lt;/span&gt;${basedir}/libs/foundation-1.0.jar&lt;span class=&quot;nt&quot;&gt;&amp;lt;/file&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.bg&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;packaging&amp;gt;&lt;/span&gt;jar&lt;span class=&quot;nt&quot;&gt;&amp;lt;/packaging&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;foundation&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;1.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;/configuration&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/execution&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/executions&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/plugin&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;单个也可以配置成：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;plugin&amp;gt;&lt;/span&gt;
+   &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.apache.maven.plugins&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+   &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;maven-install-plugin&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+   &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;2.4&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+   &lt;span class=&quot;nt&quot;&gt;&amp;lt;configuration&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.oracle&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;oraclejdbc&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;14&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;packaging&amp;gt;&lt;/span&gt;jar&lt;span class=&quot;nt&quot;&gt;&amp;lt;/packaging&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;file&amp;gt;&lt;/span&gt;${basedir}/libs/ojdbc14.jar&lt;span class=&quot;nt&quot;&gt;&amp;lt;/file&amp;gt;&lt;/span&gt;
+   &lt;span class=&quot;nt&quot;&gt;&amp;lt;/configuration&amp;gt;&lt;/span&gt;
+   &lt;span class=&quot;nt&quot;&gt;&amp;lt;executions&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;execution&amp;gt;&lt;/span&gt;
+         &lt;span class=&quot;nt&quot;&gt;&amp;lt;id&amp;gt;&lt;/span&gt;install-jar-lib&lt;span class=&quot;nt&quot;&gt;&amp;lt;/id&amp;gt;&lt;/span&gt;
+         &lt;span class=&quot;nt&quot;&gt;&amp;lt;goals&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;goal&amp;gt;&lt;/span&gt;install-file&lt;span class=&quot;nt&quot;&gt;&amp;lt;/goal&amp;gt;&lt;/span&gt;
+         &lt;span class=&quot;nt&quot;&gt;&amp;lt;/goals&amp;gt;&lt;/span&gt;
+         &lt;span class=&quot;nt&quot;&gt;&amp;lt;phase&amp;gt;&lt;/span&gt;validate&lt;span class=&quot;nt&quot;&gt;&amp;lt;/phase&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;/execution&amp;gt;&lt;/span&gt;
+   &lt;span class=&quot;nt&quot;&gt;&amp;lt;/executions&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/plugin&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;执行导入&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;在经过Maven的validate阶段时自动导入安装，在executions里指定插件的goals和maven的phase。&lt;/li&gt;
+&lt;li&gt;直接执行命令 &lt;code&gt;mvn install:install-file&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2&gt;插件属性&lt;/h2&gt;
+
+&lt;p&gt;如果要在导入时生成pom文件，增加配置属性：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&amp;lt;generatePom&amp;gt;true&amp;lt;/generatePom&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;指定自己的POM文件：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&amp;lt;generatePom&amp;gt;false&amp;lt;/generatePom&amp;gt;
+&amp;lt;pomFile&amp;gt;${basedir}/dependencies/someartifact-1.0.pom&amp;lt;/pomFile&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;如果JAR自带POM文件无需指定此属性，会自动安装。&lt;/p&gt;
+
+&lt;p&gt;更多详细配置：&lt;a href=&quot;http://maven.apache.org/plugins/maven-install-plugin/install-file-mojo.html&quot;&gt;http://maven.apache.org/plugins/maven-install-plugin/install-file-mojo.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;最后提示一句，其实Maven生命周期中的每一个阶段都是一个插件来实现的，而且都可以单独拿出来根据你的使用需要来配置。&lt;br&gt;
+详细请查看&lt;a href=&quot;http://maven.apache.org/plugins/&quot;&gt;http://maven.apache.org/plugins/&lt;/a&gt;&lt;br&gt;
+或者&lt;br&gt;
+另一篇Maven相关文章&lt;a href=&quot;http://www.cnblogs.com/xguo/archive/2013/06/01/3113146.html&quot;&gt;http://www.cnblogs.com/xguo/archive/2013/06/01/3113146.html&lt;/a&gt;。&lt;/p&gt;
+</description>
+        <pubDate>Mon, 10 Jun 2013 00:00:00 +0800</pubDate>
+        <link>http://aliencode.me/maven-install-jar-local/</link>
+        <guid isPermaLink="true">http://aliencode.me/maven-install-jar-local/</guid>
+      </item>
+    
+      <item>
+        <title>Maven使用笔记</title>
+        <description>&lt;p&gt;使用Maven有一段时间了，用它做过几个项目的构建工具，感觉还是非常不错的，省去很多不必要的麻烦，比如jar包的依赖管理，升级等，还可以处理一些繁杂的事务，比如简单的代码生成，数据导入导出等。当然这里有一定的学习成本！
+本文就一些常规使用做了介绍，包括一些需要注意的地方和本人常人的配置插件等。&lt;/p&gt;
+
+&lt;p&gt;特别说明，由于settings.xml是针对全局或个人的设置，不能随项目走，所以本文基本没有说到settings.xml的配置。&lt;/p&gt;
+
+&lt;h2&gt;Maven一般目录结构&lt;/h2&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;.
+pom.xml
+src
+   |-main
+         |-java
+         |-resources
+         |-webapp
+   |-test
+         |-java
+         |-resources
+target&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;Maven属性设置&lt;/h2&gt;
+
+&lt;h3&gt;项目属性配置&lt;/h3&gt;
+
+&lt;p&gt;&lt;em&gt;加＊项是建项目必要属性&lt;/em&gt;&lt;/p&gt;
+
+&lt;table&gt;&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性名称&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;groupId *&lt;/td&gt;
+&lt;td&gt;当前项目隶属的上级项目ID，一般是系列相关子项目的组ID，如：org.springframework&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;artifactId *&lt;/td&gt;
+&lt;td&gt;当前项目模块ID，一般为实际项目ID，如：spring-web&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;version *&lt;/td&gt;
+&lt;td&gt;此项目模块的版本&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;packaging&lt;/td&gt;
+&lt;td&gt;项目类型，jar或war，默认为jar&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;name&lt;/td&gt;
+&lt;td&gt;项目名称，如果跟IDE配合使用时IDE会识别此名称&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;description&lt;/td&gt;
+&lt;td&gt;项目描述&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;organization&lt;/td&gt;
+&lt;td&gt;所属组织&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;licenses&lt;/td&gt;
+&lt;td&gt;许可协议&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;mailingLists&lt;/td&gt;
+&lt;td&gt;邮件列表&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;developers&lt;/td&gt;
+&lt;td&gt;开发者&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;contributors&lt;/td&gt;
+&lt;td&gt;贡献者&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;issueManagement&lt;/td&gt;
+&lt;td&gt;问题追踪系统&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ciManagement&lt;/td&gt;
+&lt;td&gt;持续集成系统&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;scm&lt;/td&gt;
+&lt;td&gt;版本控制系统&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+
+&lt;h3&gt;POM一般属性变量&lt;/h3&gt;
+
+&lt;table&gt;&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;名称&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;${basedir}&lt;/td&gt;
+&lt;td&gt;项目根目录，包含pom.xml文件的目录&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;${version}&lt;/td&gt;
+&lt;td&gt;项目的版本&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;${pom.build.sourceDirectory}&lt;/td&gt;
+&lt;td&gt;项目的主源码目录，默认为：src/main/java&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;${pom.build.testSourceDiretory}&lt;/td&gt;
+&lt;td&gt;项目的测试源码目录， 默认为：src/test/java&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;${pom.build.directory}&lt;/td&gt;
+&lt;td&gt;项目构建输出目录,默认为target&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;${pom.outputDirectory}&lt;/td&gt;
+&lt;td&gt;项目主代码编译输出目录，默认为: target/classess&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;${pom.testOutputDirectory}&lt;/td&gt;
+&lt;td&gt;项目主代码编译输出目录，默认为: target/test-classess&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;${pom.groupId}&lt;/td&gt;
+&lt;td&gt;项目的groupId&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;${pom.artifactId}&lt;/td&gt;
+&lt;td&gt;项目的artifactId&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;${pom.version}&lt;/td&gt;
+&lt;td&gt;项目的版本&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;${pom.build.finalName}&lt;/td&gt;
+&lt;td&gt;项目打包输出文件的名称，默认为${pom.artifactId}-${pom.version}&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+
+&lt;p&gt;以上build属性可通过pom.xml文件中build结点指定如：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;build&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;directory&amp;gt;&lt;/span&gt;${pom.basedir}/target&lt;span class=&quot;nt&quot;&gt;&amp;lt;/directory&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;outputDirectory&amp;gt;&lt;/span&gt;${pom.build.directory}/classes&lt;span class=&quot;nt&quot;&gt;&amp;lt;/outputDirectory&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;finalName&amp;gt;&lt;/span&gt;${pom.artifactId}-${pom.version}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/finalName&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;testOutputDirectory&amp;gt;&lt;/span&gt;${pom.build.directory}/test-classes&lt;span class=&quot;nt&quot;&gt;&amp;lt;/testOutputDirectory&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;sourceDirectory&amp;gt;&lt;/span&gt;${pom.basedir}/src/main/java&lt;span class=&quot;nt&quot;&gt;&amp;lt;/sourceDirectory&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;scriptSourceDirectory&amp;gt;&lt;/span&gt;src/main/scripts&lt;span class=&quot;nt&quot;&gt;&amp;lt;/scriptSourceDirectory&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;testSourceDirectory&amp;gt;&lt;/span&gt;${pom.basedir}/src/test/java&lt;span class=&quot;nt&quot;&gt;&amp;lt;/testSourceDirectory&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;resources&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;resource&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;directory&amp;gt;&lt;/span&gt;${pom.basedir}/src/main/resources&lt;span class=&quot;nt&quot;&gt;&amp;lt;/directory&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;/resource&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/resources&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;testResources&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;testResource&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;directory&amp;gt;&lt;/span&gt;${pom.basedir}/src/test/resources&lt;span class=&quot;nt&quot;&gt;&amp;lt;/directory&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;/testResource&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/testResources&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;build&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;更多内容：&lt;a href=&quot;http://docs.codehaus.org/display/MAVENUSER/MavenPropertiesGuide&quot;&gt;MavenPropertiesGuide&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3&gt;自定义属性变量&lt;/h3&gt;
+
+&lt;p&gt;在根结点增加：&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;projecties&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt;     &lt;span class=&quot;nt&quot;&gt;&amp;lt;spring.version&amp;gt;&lt;/span&gt;3.1-RELEASE&lt;span class=&quot;nt&quot;&gt;&amp;lt;/spring.version&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt;     &lt;span class=&quot;nt&quot;&gt;&amp;lt;hibernate.version&amp;gt;&lt;/span&gt;4.2-FINAL&lt;span class=&quot;nt&quot;&gt;&amp;lt;/hibernate.version&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;4&lt;/span&gt;     &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 使用${spring.version}读取 --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;/projecties&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;资源文件使用Maven变量&lt;/h3&gt;
+
+&lt;p&gt;如有文件 &lt;code&gt;src/main/resources/application.properties&lt;/code&gt;：&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;#application.properties
+application.name=${pom.name}
+application.version=${pom.version}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;执行命令：&lt;code&gt;mvn process-resources&lt;/code&gt; maven会给其中的亦是赋值：&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;#application.properties
+application.name=Maven Quick Start Archetype
+application.version=1.0-SNAPSHOT&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;更多内容：&lt;a href=&quot;http://maven.apache.org/guides/getting-started/index.html#How_do_I_filter_resource_files&quot;&gt;http://maven.apache.org/guides/getting-started/index.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2&gt;Maven依赖管理&lt;/h2&gt;
+
+&lt;h3&gt;自定义源地址&lt;/h3&gt;
+
+&lt;p&gt;如在maven的中央仓库中没有你要用的jar包，通过自定义源解决：&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;repositories&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;&amp;lt;repository&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 3&lt;/span&gt;      &lt;span class=&quot;nt&quot;&gt;&amp;lt;id&amp;gt;&lt;/span&gt;central&lt;span class=&quot;nt&quot;&gt;&amp;lt;/id&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 4&lt;/span&gt;      &lt;span class=&quot;nt&quot;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;Maven Repository Switchboard&lt;span class=&quot;nt&quot;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 5&lt;/span&gt;      &lt;span class=&quot;nt&quot;&gt;&amp;lt;layout&amp;gt;&lt;/span&gt;default&lt;span class=&quot;nt&quot;&gt;&amp;lt;/layout&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 6&lt;/span&gt;      &lt;span class=&quot;nt&quot;&gt;&amp;lt;url&amp;gt;&lt;/span&gt;http://repo1.maven.org/maven2&lt;span class=&quot;nt&quot;&gt;&amp;lt;/url&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 7&lt;/span&gt;      &lt;span class=&quot;nt&quot;&gt;&amp;lt;snapshots&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 8&lt;/span&gt;      &lt;span class=&quot;nt&quot;&gt;&amp;lt;enabled&amp;gt;&lt;/span&gt;false&lt;span class=&quot;nt&quot;&gt;&amp;lt;/enabled&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 9&lt;/span&gt;      &lt;span class=&quot;nt&quot;&gt;&amp;lt;/snapshots&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;10&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/repository&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;11&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;/repositories&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;排除依赖和子项目依赖&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 子项目，被依赖的子项目必须经过maven的install安装，不然maven还是找不到！ --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;bgonline&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 3&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;foundation&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 4&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;1.0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 5&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 排除 --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 6&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;exclusions&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 7&lt;/span&gt;     &lt;span class=&quot;nt&quot;&gt;&amp;lt;exclusion&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 8&lt;/span&gt;         &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;log4j&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 9&lt;/span&gt;         &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;log4j&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;10&lt;/span&gt;     &lt;span class=&quot;nt&quot;&gt;&amp;lt;/exclusion&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;11&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;/exclusions&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;本地JAR包安装&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;安装jar文件&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;call mvn install:install-file -Dfile=xxx-1.0.0.jar -DgroupId=com.xx -DartifactId=xx -Dversion=1.0.0 -Dpackaging=jar&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;安装pom文件&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;call mvn install:install-file -Dfile=xxx-1.0.0.pom.xml -DgroupId=com.xx -DartifactId=xx -Dversion=1.0.0 -Dpackaging=pom&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;Maven插件管理&lt;/h2&gt;
+
+&lt;h3&gt;添加插件：&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;build&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;&amp;lt;pluginManagement&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 3&lt;/span&gt;      &lt;span class=&quot;nt&quot;&gt;&amp;lt;plugins&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 4&lt;/span&gt;          &lt;span class=&quot;nt&quot;&gt;&amp;lt;plugin&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 5&lt;/span&gt;              &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;maven-antrun-plugin&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 6&lt;/span&gt;              &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;1.3&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 7&lt;/span&gt;          &lt;span class=&quot;nt&quot;&gt;&amp;lt;/plugin&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 8&lt;/span&gt;      &lt;span class=&quot;nt&quot;&gt;&amp;lt;/plugins&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 9&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/pluginManagement&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;10&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;/build&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;自定义插件源&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;pluginRepositories&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;&amp;lt;pluginRepository&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 3&lt;/span&gt;      &lt;span class=&quot;nt&quot;&gt;&amp;lt;id&amp;gt;&lt;/span&gt;central&lt;span class=&quot;nt&quot;&gt;&amp;lt;/id&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 4&lt;/span&gt;      &lt;span class=&quot;nt&quot;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;Maven Plugin Repository&lt;span class=&quot;nt&quot;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 5&lt;/span&gt;      &lt;span class=&quot;nt&quot;&gt;&amp;lt;url&amp;gt;&lt;/span&gt;http://repo1.maven.org/maven2&lt;span class=&quot;nt&quot;&gt;&amp;lt;/url&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 6&lt;/span&gt;      &lt;span class=&quot;nt&quot;&gt;&amp;lt;layout&amp;gt;&lt;/span&gt;default&lt;span class=&quot;nt&quot;&gt;&amp;lt;/layout&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 7&lt;/span&gt;      &lt;span class=&quot;nt&quot;&gt;&amp;lt;snapshots&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 8&lt;/span&gt;          &lt;span class=&quot;nt&quot;&gt;&amp;lt;enabled&amp;gt;&lt;/span&gt;false&lt;span class=&quot;nt&quot;&gt;&amp;lt;/enabled&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 9&lt;/span&gt;      &lt;span class=&quot;nt&quot;&gt;&amp;lt;/snapshots&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;10&lt;/span&gt;      &lt;span class=&quot;nt&quot;&gt;&amp;lt;releases&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;11&lt;/span&gt;          &lt;span class=&quot;nt&quot;&gt;&amp;lt;updatePolicy&amp;gt;&lt;/span&gt;never&lt;span class=&quot;nt&quot;&gt;&amp;lt;/updatePolicy&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;12&lt;/span&gt;      &lt;span class=&quot;nt&quot;&gt;&amp;lt;/releases&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;13&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/pluginRepository&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;14&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;/pluginRepositories&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;常用插件&lt;/h3&gt;
+
+&lt;table&gt;&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;名称&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;jetty-maven-plugin&lt;/td&gt;
+&lt;td&gt;jetty插件，轻量级web容器，推荐阶段开发使用&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;maven-antrun-plugin&lt;/td&gt;
+&lt;td&gt;跑ant命令插件，常用来做文件处理，sql执行等，基本包括ant所有功能&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;native2ascii-maven-plugin&lt;/td&gt;
+&lt;td&gt;转ascii，如多语言配置文件的中文转成ascii码解决乱码问题&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;versions-maven-plugin&lt;/td&gt;
+&lt;td&gt;检测所有依赖的更新情况&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;maven-surefire-plugin&lt;/td&gt;
+&lt;td&gt;生成测试报告，配全Testng，指定单元测试的配置文件，进行分组、分类、分包测试，可参考Testng文档说明&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+
+&lt;p&gt;更多内容：&lt;a href=&quot;http://maven.apache.org/plugins/index.html&quot;&gt;plugins&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2&gt;Maven Profile使用&lt;/h2&gt;
+
+&lt;p&gt;有时候会根据不同的情况执行不现的构建命令，这就用到maven的profile，profile可以直接写在pom.xml里也可以被提出到独立文件profiles.xml同pom.xml同级目录或settings.xml，但Maven3只支持写在pom.xml文件里，why？！&lt;/p&gt;
+
+&lt;p&gt;1.使用profile+ant执行sql做数据初始化：&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;profile&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt;     &lt;span class=&quot;nt&quot;&gt;&amp;lt;id&amp;gt;&lt;/span&gt;INIT-DB-DATA&lt;span class=&quot;nt&quot;&gt;&amp;lt;/id&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 3&lt;/span&gt;     &lt;span class=&quot;nt&quot;&gt;&amp;lt;build&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 4&lt;/span&gt;         &lt;span class=&quot;nt&quot;&gt;&amp;lt;plugins&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 5&lt;/span&gt;             &lt;span class=&quot;nt&quot;&gt;&amp;lt;plugin&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 6&lt;/span&gt;                 &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.apache.maven.plugins&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 7&lt;/span&gt;                 &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;maven-antrun-plugin&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 8&lt;/span&gt;                 &lt;span class=&quot;nt&quot;&gt;&amp;lt;configuration&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 9&lt;/span&gt;                     &lt;span class=&quot;nt&quot;&gt;&amp;lt;target&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;10&lt;/span&gt;                         &lt;span class=&quot;nt&quot;&gt;&amp;lt;sql&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;driver=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;${jdbc.driver}&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;url=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;${jdbc.url}&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;userid=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;${jdbc.username}&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;password=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;${jdbc.password}&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;onerror=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;continue&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;11&lt;/span&gt;                             &lt;span class=&quot;nt&quot;&gt;&amp;lt;classpath&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;refid=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;maven.runtime.classpath&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;12&lt;/span&gt;                             &lt;span class=&quot;nt&quot;&gt;&amp;lt;transaction&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;src/main/resources/sql/${jdbc.direct}/schema.sql&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;13&lt;/span&gt;                         &lt;span class=&quot;nt&quot;&gt;&amp;lt;/sql&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;14&lt;/span&gt;                     &lt;span class=&quot;nt&quot;&gt;&amp;lt;/target&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;15&lt;/span&gt;                 &lt;span class=&quot;nt&quot;&gt;&amp;lt;/configuration&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;16&lt;/span&gt;             &lt;span class=&quot;nt&quot;&gt;&amp;lt;/plugin&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;17&lt;/span&gt;         &lt;span class=&quot;nt&quot;&gt;&amp;lt;/plugins&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;18&lt;/span&gt;     &lt;span class=&quot;nt&quot;&gt;&amp;lt;/build&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;19&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;/profile&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;2.使用maven profile ant hibernate-tools生成类bean：&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;profile&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt;     &lt;span class=&quot;nt&quot;&gt;&amp;lt;id&amp;gt;&lt;/span&gt;Gen-Java-Bean&lt;span class=&quot;nt&quot;&gt;&amp;lt;/id&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 3&lt;/span&gt;     &lt;span class=&quot;nt&quot;&gt;&amp;lt;build&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 4&lt;/span&gt;         &lt;span class=&quot;nt&quot;&gt;&amp;lt;plugins&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 5&lt;/span&gt;             &lt;span class=&quot;nt&quot;&gt;&amp;lt;plugin&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 6&lt;/span&gt;                 &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.apache.maven.plugins&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 7&lt;/span&gt;                 &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;maven-antrun-plugin&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 8&lt;/span&gt;                 &lt;span class=&quot;nt&quot;&gt;&amp;lt;configuration&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 9&lt;/span&gt;                     &lt;span class=&quot;nt&quot;&gt;&amp;lt;target&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;10&lt;/span&gt;                         &lt;span class=&quot;nt&quot;&gt;&amp;lt;echo&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;message=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;生成表ENTITY类……&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;11&lt;/span&gt;                         &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;toolsDir&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;src/test/tools&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;12&lt;/span&gt;                         &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 这里需要指定hibernatetool相关jar包，自行下载 --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;13&lt;/span&gt;                         &lt;span class=&quot;nt&quot;&gt;&amp;lt;path&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;lib.class.path&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;14&lt;/span&gt;                             &lt;span class=&quot;nt&quot;&gt;&amp;lt;fileset&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;dir=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;${toolsDir}/lib&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;15&lt;/span&gt;                                 &lt;span class=&quot;nt&quot;&gt;&amp;lt;include&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;*.jar&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;16&lt;/span&gt;                             &lt;span class=&quot;nt&quot;&gt;&amp;lt;/fileset&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;17&lt;/span&gt;                         &lt;span class=&quot;nt&quot;&gt;&amp;lt;/path&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;18&lt;/span&gt;                         &lt;span class=&quot;nt&quot;&gt;&amp;lt;taskdef&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;hibernatetool&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;classname=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;org.hibernate.tool.ant.HibernateToolTask&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;classpathref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;lib.class.path&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;19&lt;/span&gt;                         &lt;span class=&quot;nt&quot;&gt;&amp;lt;hibernatetool&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;destdir=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;${toolsDir}/lib/build&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;20&lt;/span&gt;                             &lt;span class=&quot;nt&quot;&gt;&amp;lt;jdbcconfiguration&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;propertyfile=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;${toolsDir}/lib/cfg/jdbc.properties&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;revengfile=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;${toolsDir}/lib/cfg/hibernate.reveng.xml&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;21&lt;/span&gt;                             &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 指定hibernatetools生成bean的模板，根据自己需要定制生成内容，用的freemarker引擎，在hibernate-tools.jar包里有默认模板 --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;22&lt;/span&gt;                             &lt;span class=&quot;nt&quot;&gt;&amp;lt;hbmtemplate&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;23&lt;/span&gt;                                     &lt;span class=&quot;na&quot;&gt;destdir=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;${toolsDir}/lib/build&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;24&lt;/span&gt;                                     &lt;span class=&quot;na&quot;&gt;templatepath=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;${basedir}/${toolsDir}/lib/hbmtemplates/&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;25&lt;/span&gt;                                     &lt;span class=&quot;na&quot;&gt;templateprefix=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;/hbmtemplates&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;26&lt;/span&gt;                                     &lt;span class=&quot;na&quot;&gt;filepattern=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;{class-name}Entity.java&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;27&lt;/span&gt;                                     &lt;span class=&quot;na&quot;&gt;template=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;pojo2/Pojo.ftl&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;28&lt;/span&gt;                                 &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;key=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;ejb3&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;false&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;29&lt;/span&gt;                                 &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;key=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;jdk5&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;false&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;30&lt;/span&gt;                             &lt;span class=&quot;nt&quot;&gt;&amp;lt;/hbmtemplate&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;31&lt;/span&gt;                             &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 或者直接 &amp;lt;hbm2java/&amp;gt; 只是这样使用的是默认模板 --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;32&lt;/span&gt;                         &lt;span class=&quot;nt&quot;&gt;&amp;lt;/hibernatetool&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;33&lt;/span&gt;                     &lt;span class=&quot;nt&quot;&gt;&amp;lt;/target&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;34&lt;/span&gt;                 &lt;span class=&quot;nt&quot;&gt;&amp;lt;/configuration&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;35&lt;/span&gt;             &lt;span class=&quot;nt&quot;&gt;&amp;lt;/plugin&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;36&lt;/span&gt;         &lt;span class=&quot;nt&quot;&gt;&amp;lt;/plugins&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;37&lt;/span&gt;     &lt;span class=&quot;nt&quot;&gt;&amp;lt;/build&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;38&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;/profile&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;更多内容：&lt;a href=&quot;http://maven.apache.org/guides/introduction/introduction-to-profiles.html&quot;&gt;profiles.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2&gt;Maven多项目配置&lt;/h2&gt;
+
+&lt;p&gt;创建如下目录结构：&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;+- pom.xml 父
+    +- my-app
+    | +- pom.xml 子1，jar类型
+    | +- src
+    |   +- main
+    |     +- java
+    +- my-webapp
+    | +- pom.xml 子2，webapp类型
+    | +- src
+    |   +- main
+    |     +- webapp&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;父pom内容如下：&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;project&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;http://maven.apache.org/POM/4.0.0&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns:xsi=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;http://www.w3.org/2001/XMLSchema-instance&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt;   &lt;span class=&quot;nt&quot;&gt;&amp;lt;modelVersion&amp;gt;&lt;/span&gt;4.0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/modelVersion&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 3&lt;/span&gt;   &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;com.mycompany.app&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 4&lt;/span&gt;   &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;app&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 5&lt;/span&gt;   &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;1.0-SNAPSHOT&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 6&lt;/span&gt;   &lt;span class=&quot;nt&quot;&gt;&amp;lt;packaging&amp;gt;&lt;/span&gt;pom&lt;span class=&quot;nt&quot;&gt;&amp;lt;/packaging&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 7&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt; 8&lt;/span&gt;   &lt;span class=&quot;nt&quot;&gt;&amp;lt;modules&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 9&lt;/span&gt;     &lt;span class=&quot;nt&quot;&gt;&amp;lt;module&amp;gt;&lt;/span&gt;my-app&lt;span class=&quot;nt&quot;&gt;&amp;lt;/module&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;10&lt;/span&gt;     &lt;span class=&quot;nt&quot;&gt;&amp;lt;module&amp;gt;&lt;/span&gt;my-webapp&lt;span class=&quot;nt&quot;&gt;&amp;lt;/module&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;11&lt;/span&gt;   &lt;span class=&quot;nt&quot;&gt;&amp;lt;/modules&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;12&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;/project&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;em&gt;注：&lt;/em&gt;一些项目全局属性可在此pom文件中设置，比如项目信息，所有依赖等，这样在子项目就不用重复申明，如依赖可省掉版本号，直接使用父pom中的版本，这样可以统一管理所有项目的依赖版本。&lt;/p&gt;
+
+&lt;p&gt;子1的pom内容如下：&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;project&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;http://maven.apache.org/POM/4.0.0&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns:xsi=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;http://www.w3.org/2001/XMLSchema-instance&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt;     &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;com.mycompany.app&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 3&lt;/span&gt;     &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;app-jar&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 4&lt;/span&gt;     &lt;span class=&quot;nt&quot;&gt;&amp;lt;packaging&amp;gt;&lt;/span&gt;jar&lt;span class=&quot;nt&quot;&gt;&amp;lt;/packaging&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 5&lt;/span&gt;     &lt;span class=&quot;nt&quot;&gt;&amp;lt;parent&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 6&lt;/span&gt;         &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;com.mycompany.app&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 7&lt;/span&gt;         &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;app&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 8&lt;/span&gt;         &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;1.0-SNAPSHOT&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 9&lt;/span&gt;     &lt;span class=&quot;nt&quot;&gt;&amp;lt;/parent&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;10&lt;/span&gt;     ...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;子2的pom内容如下：&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;project&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;http://maven.apache.org/POM/4.0.0&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns:xsi=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;http://www.w3.org/2001/XMLSchema-instance&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt;     &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;com.mycompany.app&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 3&lt;/span&gt;     &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;app-war&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 4&lt;/span&gt;     &lt;span class=&quot;nt&quot;&gt;&amp;lt;packaging&amp;gt;&lt;/span&gt;war&lt;span class=&quot;nt&quot;&gt;&amp;lt;/packaging&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 5&lt;/span&gt;     &lt;span class=&quot;nt&quot;&gt;&amp;lt;parent&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 6&lt;/span&gt;         &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;com.mycompany.app&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 7&lt;/span&gt;         &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;app&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 8&lt;/span&gt;         &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;1.0-SNAPSHOT&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 9&lt;/span&gt;     &lt;span class=&quot;nt&quot;&gt;&amp;lt;/parent&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;10&lt;/span&gt;     ...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;子2需要依赖子1，配置如下：&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; ...
+&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;dependencies&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;4&lt;/span&gt;     &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;com.mycompany.app&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;5&lt;/span&gt;     &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;my-app&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;6&lt;/span&gt;     &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;1.0-SNAPSHOT&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;7&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;8&lt;/span&gt; ...
+&lt;span class=&quot;lineno&quot;&gt;9&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;/dependencies&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;最后在父pom所在目录执行&lt;code&gt;mvn clean install&lt;/code&gt;命令，jar包会被安装本地仓库，war会被发布到target目录。&lt;/p&gt;
+
+&lt;h2&gt;Maven创建项目&lt;/h2&gt;
+
+&lt;h3&gt;创建java项目&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;mvn archetype:generate \
+      -DarchetypeGroupId=org.apache.maven.archetypes \
+      -DgroupId=com.mycompany.app \
+      -DartifactId=my-app&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;生成的目录结构：&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;my-app
+    |-- pom.xml
+    `-- src
+        |-- main
+        |   `-- java
+        |       `-- com
+        |           `-- mycompany
+        |               `-- app
+        |                   `-- App.java
+        `-- test
+            `-- java
+                `-- com
+                    `-- mycompany
+                        `-- app
+                            `-- AppTest.java&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;创建java webapp&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;mvn archetype:generate \
+    -DarchetypeGroupId=org.apache.maven.archetypes \
+    -DarchetypeArtifactId=maven-archetype-webapp \
+    -DgroupId=com.mycompany.app \
+    -DartifactId=my-webapp&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;生成的目录结构：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;+- my-webapp
+| +- pom.xml
+| +- src
+|   +- main
+|     +- resources
+|     +- webapp
+|       +- index.jsp
+|       +- WEB-INF
+|         +- web.xml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;之后根据需要在main下创建java目录，在src创建test目录。&lt;/p&gt;
+
+&lt;h2&gt;生命周期常用命令&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;编译 &lt;code&gt;mvn compile&lt;/code&gt;，编译测试 &lt;code&gt;mvn test-compile&lt;/code&gt;,不执行测试，仅编译&lt;/li&gt;
+&lt;li&gt;测试 &lt;code&gt;mvn test&lt;/code&gt;，执行测试&lt;/li&gt;
+&lt;li&gt;打包 &lt;code&gt;mvn package&lt;/code&gt;，java项目打成jar包，web项目打包war包&lt;/li&gt;
+&lt;li&gt;安装 &lt;code&gt;mvn install&lt;/code&gt;，将自己java项目生成的jar包安装到本地仓库&lt;/li&gt;
+&lt;li&gt;站点 &lt;code&gt;mvn site&lt;/code&gt;，根据pom.xml配置信息生成项目相关的站点在target/site&lt;/li&gt;
+&lt;li&gt;清除 &lt;code&gt;mvn clean&lt;/code&gt;，将target目录下build后的内容删除&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;更多内容：&lt;a href=&quot;http://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html&quot;&gt;lifecycle.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2&gt;更多Maven参考&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;POM详细说明文档 ：&lt;a href=&quot;http://maven.apache.org/pom.html&quot;&gt;http://maven.apache.org/pom.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;POM说明3.0.5版：&lt;a href=&quot;http://maven.apache.org/ref/3.0.5/maven-model/maven.html&quot;&gt;http://maven.apache.org/ref/3.0.5/maven-model/maven.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Maven-3.0.5文档：&lt;a href=&quot;http://maven.apache.org/ref/3.0.5/&quot;&gt;http://maven.apache.org/ref/3.0.5/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;maven.apache.org：&lt;a href=&quot;http://maven.apache.org/guides/getting-started/&quot;&gt;http://maven.apache.org/guides/getting-started/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;docs.codehaus.org：&lt;a href=&quot;http://docs.codehaus.org/display/MAVENUSER&quot;&gt;http://docs.codehaus.org/display/MAVENUSER&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Wed, 01 May 2013 00:00:00 +0800</pubDate>
+        <link>http://aliencode.me/maven/</link>
+        <guid isPermaLink="true">http://aliencode.me/maven/</guid>
+      </item>
+    
+  </channel>
+</rss>
