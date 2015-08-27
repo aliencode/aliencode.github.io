@@ -1,0 +1,28 @@
+---
+layout: default
+---
+
+<div class="posts">
+
+    {% for post in site.posts %}
+    {% capture y %}{{post.date | date:"%Y"}}{% endcapture %}
+    {% if year != y %}
+    {% assign year = y %}
+    <i class="listing-seperator">{{ y }}</i>
+    {% endif %}
+    <li class="posts-item">
+        <span class="datetime">{{ post.date | date: "%Y - %m - %d" }}</span>
+        <div class="posttitle">
+            <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+            <div class="desc">
+                {% if post.more %}
+                {{ post.content | split: '<!-- more -->' | first }}
+                {% else %}
+                {{ post.excerpt }}
+                {% endif %}
+            </div>
+        </div>
+    </li>
+    {% endfor %}
+
+</div>
