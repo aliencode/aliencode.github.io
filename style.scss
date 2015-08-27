@@ -29,6 +29,10 @@ table {
   width: 100%;
 }
 
+code, kbd, pre, samp {
+    font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+}
+
 h1, h2, h3, h4, h5, h6 {
   color: $darkerGray;
   //font-weight: normal;
@@ -75,34 +79,38 @@ a {
   }
 }
 *:not(pre)>code{
-  border: 1px solid #eaeaea;
-  color: #333;
-  padding: 2px .5ex;
-  letter-spacing: 0;
-  word-spacing: -.15em;
-  background-color: #fafafa;
-  -webkit-border-radius: 4px;
-  display: inline-block;
+  padding: 2px 4px;
+  font-size: 90%;
+  color: #c7254e;
+  background-color: #f9f2f4;
   border-radius: 4px;
+  /* border: 1px solid #eaeaea; */
+  /* color: #333; */
+  /* padding: 2px .5ex; */
+  /* letter-spacing: 0; */
+  /* word-spacing: -.15em; */
+  /* background-color: #fafafa; */
+  /* -webkit-border-radius: 4px; */
+  /* display: inline-block; */
+  /* border-radius: 4px; */
   line-height: 1;
   margin: 0 5px;
-  text-rendering: optimizeSpeed;
+  /* text-rendering: optimizeSpeed; */
 }
 pre{
   padding: 0;
   margin: 0;
 }
 kbd {
-  font-weight: normal;
   display: inline-block;
-  color: rgba(0, 0, 0, 0.8);
+  font-size: 14px;
   line-height: 1;
   background-color: #fafafa;
   border: 1px solid #ddd;
   -webkit-border-radius: 3px;
   border-radius: 3px;
-  -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 0.1em white inset;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 0.1em #fff inset;
+  -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08), 0 0 0 0.1em white inset;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08), 0 0 0 0.1em #fff inset;
   margin: -.15em .15em 0 .15em;
   padding: 3px 5px;
   vertical-align: middle;
@@ -385,6 +393,13 @@ body{
 
   .entry{
     font-size:16px;
+    a{
+          border-bottom: 1px dashed #ddd;
+      color: #888;
+      &:hover, &:active {
+        color: #333;
+      }
+    }
   }
   .post{
     table {
