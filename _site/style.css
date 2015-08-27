@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /**************/
 /* BASE RULES */
 /**************/
@@ -208,9 +209,9 @@ body {
   color: #666;
   box-sizing: border-box;
   font-size: 14px;
-  background: #f9f9f9;
+  background: #f5f5f5;
   font-weight: 200;
-  font-family: 'Assemble SSm A', 'Microsoft YaHei', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Assemble SSm A', 'Microsoft YaHei','微软雅黑', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   margin: 0;
   padding: 0;
 }
@@ -300,18 +301,14 @@ body {
   color: #aaa;
 }
 .wrapper .posts-item a {
-  display: inline-block;
-  line-height: 1px;
   font-size: 18px;
-  transition: all 0.08s;
+  line-height: 1;
 }
 .wrapper .posts-item a:hover {
   color: #F97F46;
-  transform: translateY(-1px);
 }
 .wrapper .posts-item a:active {
   color: #F97F46;
-  transform: translateY(1px);
 }
 .wrapper .posts-item {
   border-bottom: 2px solid #fafafa;
@@ -398,6 +395,8 @@ body {
 .wrapper .post span.lineno {
   font-size: 12px;
   color: #999;
+  text-shadow: 1px 1px 0 white;
+  padding-right: 10px;
 }
 .wrapper .post h2 {
   line-height: 1;
@@ -471,13 +470,22 @@ body {
   color: #F97F46;
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 800px) {
+  .wrapper .posts span {
+    display: none;
+  }
+
+  .wrapper .posts-item .posttitle {
+    margin: 0;
+  }
+
   .header {
     margin: 0;
     position: relative;
     left: 0;
     top: 0;
     width: 100%;
+    padding: 20px 0;
   }
 
   .wrapper {
