@@ -387,13 +387,6 @@ body {
 .wrapper .entry {
   font-size: 16px;
 }
-.wrapper .entry a {
-  border-bottom: 1px dashed #ddd;
-  color: #888;
-}
-.wrapper .entry a:hover, .wrapper .entry a:active {
-  color: #333;
-}
 .wrapper .post table {
   display: block;
   width: 100%;

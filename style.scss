@@ -393,13 +393,6 @@ body{
 
   .entry{
     font-size:16px;
-    a{
-          border-bottom: 1px dashed #ddd;
-      color: #888;
-      &:hover, &:active {
-        color: #333;
-      }
-    }
   }
   .post{
     table {
