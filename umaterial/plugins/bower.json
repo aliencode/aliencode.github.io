@@ -1,0 +1,9 @@
+{
+  "name":"plugins",
+  "dependencies": {
+
+    "angular-summernote":"",
+    "magnific-popup":""
+
+  }
+}
