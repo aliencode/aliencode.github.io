@@ -58,10 +58,6 @@ angular.module('abMaterial').controller('DashboardCtrl', function ($scope, $mdTo
     };
 
 
-
-
-
-
 });
 
 
@@ -176,61 +172,57 @@ UMaterialApp
         return {
             restrict: 'A',
             link: function (scope, element) {
-                $ocLazyLoad.load({insertBefore:'link:eq(0)',files:['plugins/bower_components/moment/min/moment.min.js','plugins/bower_components/fullcalendar/dist/fullcalendar.min.js',{ type: 'css', path: 'plugins/bower_components/fullcalendar/dist/fullcalendar.css'}]}).then(function () {
-                    setTimeout(function () {
-                        element.fullCalendar({
-                            contentHeight: 'auto',
-                            theme: true,
-                            header: {
-                                right: '',
-                                center: 'prev, title, next',
-                                left: ''
-                            },
-                            defaultDate: '2016-01-01',
-                            editable: true,
-                            events: [
-                                {
-                                    title: 'All Day',
-                                    start: '2016-01-01',
-                                    className: 'bgc-cyan'
-                                },
-                                {
-                                    title: 'Long Event',
-                                    start: '2016-01-03',
-                                    end: '2016-01-05',
-                                    className: 'bgc-orange'
-                                },
-                                {
-                                    id: 999,
-                                    title: 'Repeat',
-                                    start: '2016-01-18',
-                                    className: 'bgc-lightgreen'
-                                },
-                                {
-                                    id: 999,
-                                    title: 'Repeat',
-                                    start: '2016-01-16',
-                                    className: 'bgc-blue'
-                                },
-                                {
-                                    title: 'Lunch',
-                                    start: '2016-01-12',
-                                    className: 'bgc-gray'
-                                },
-                                {
-                                    title: 'Birthday',
-                                    start: '2016-01-13',
-                                    className: 'bgc-pink'
-                                },
-                                {
-                                    title: 'Google',
-                                    url: 'http://google.com/',
-                                    start: '2016-01-28',
-                                    className: 'bgc-red'
-                                }
-                            ]
-                        });
-                    }, 1000);
+                element.fullCalendar({
+                    contentHeight: 'auto',
+                    theme: true,
+                    header: {
+                        right: '',
+                        center: 'prev, title, next',
+                        left: ''
+                    },
+                    defaultDate: '2016-01-01',
+                    editable: true,
+                    events: [
+                        {
+                            title: 'All Day',
+                            start: '2016-01-01',
+                            className: 'bgc-cyan'
+                        },
+                        {
+                            title: 'Long Event',
+                            start: '2016-01-03',
+                            end: '2016-01-05',
+                            className: 'bgc-orange'
+                        },
+                        {
+                            id: 999,
+                            title: 'Repeat',
+                            start: '2016-01-18',
+                            className: 'bgc-lightgreen'
+                        },
+                        {
+                            id: 999,
+                            title: 'Repeat',
+                            start: '2016-01-16',
+                            className: 'bgc-blue'
+                        },
+                        {
+                            title: 'Lunch',
+                            start: '2016-01-12',
+                            className: 'bgc-gray'
+                        },
+                        {
+                            title: 'Birthday',
+                            start: '2016-01-13',
+                            className: 'bgc-pink'
+                        },
+                        {
+                            title: 'Google',
+                            url: 'http://google.com/',
+                            start: '2016-01-28',
+                            className: 'bgc-red'
+                        }
+                    ]
                 });
             }
         }
