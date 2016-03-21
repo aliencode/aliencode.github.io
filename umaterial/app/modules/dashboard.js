@@ -176,7 +176,7 @@ UMaterialApp
         return {
             restrict: 'A',
             link: function (scope, element) {
-                $ocLazyLoad.load({insertBefore:'link:eq(0)',files:['vendors/bower_components/fullcalendar/dist/fullcalendar.min.js',{ type: 'css', path: 'vendors/bower_components/fullcalendar/dist/fullcalendar.css'}]}).then(function () {
+                $ocLazyLoad.load({insertBefore:'link:eq(0)',files:['plugins/bower_components/moment/min/moment.min.js','plugins/bower_components/fullcalendar/dist/fullcalendar.min.js',{ type: 'css', path: 'plugins/bower_components/fullcalendar/dist/fullcalendar.css'}]}).then(function () {
                     setTimeout(function () {
                         element.fullCalendar({
                             contentHeight: 'auto',
@@ -244,7 +244,7 @@ UMaterialApp
             link: function (scope, element) {
 
                 $ocLazyLoad.load([
-                    'vendors/bower_components/sparklines/index.js']).then(function () {
+                    'plugins/bower_components/sparklines/index.js']).then(function () {
                     function sparkLineLine(selector, values, width, height, lineColor, fillColor, lineWidth, maxSpotColor, minSpotColor, spotColor, spotRadius, hSpotColor, hLineColor) {
                         $(selector).sparkline(values, {
                             type: 'line',
